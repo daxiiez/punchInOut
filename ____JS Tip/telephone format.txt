@@ -1,0 +1,9 @@
+<script>
+$(document).ready(()=>{
+	$("#tel").mask("999-9999999");
+})
+</script>
+
+<body>
+	<input id='tel'>
+</body>

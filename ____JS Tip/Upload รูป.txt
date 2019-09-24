@@ -1,0 +1,78 @@
+﻿==========================JS=================================
+$(document).ready(function () {
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                // label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                label = input.val();
+            //  label = input.files[0].name;
+            input.trigger('fileselect', [label]);
+        });
+        $('.btn-file :file').on('fileselect', function (event, label) {
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+            if (input.length) {
+                input.val(log);
+            } else {
+                // if (log) alert(log);
+            }
+        });
+        function readURL(input, id) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(id).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                readFile(input.files[0], function (e) {
+                    // alert( e.target.result);
+                });
+            }
+        }
+        function readFile(file, callback) {
+            var reader = new FileReader();
+            reader.onload = callback
+            reader.readAsText(file);
+        }
+        $("#imgInp").change(function () {
+            readURL(this, '#img-upload');
+        });
+        $("#imgEdit").change(function () {
+            readURL(this, '#editProductImg');
+        });
+    });
+====================================HTML=======================================
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" align="center">
+                                    <img id="img-upload" src="img/Product/upload.png" width="200" border="5">
+                                    <hr>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                               <span class="btn btn-sm btn-default btn-file btn-outline-info"><i
+                                                           class="fa fa-image"></i> เลือกรูปภาพ
+                                                   <input type="file" name="imgInp" id="imgInp">
+                                               </span>
+                                           </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+==========================PHP=================================
+if (isset($_POST['insertProduct'])) {
+    $file = $_FILES['imgInp']['tmp_name'];
+    $img = addslashes(file_get_contents($file));
+    $name = $_POST['newProductName'];
+    $type = $_POST['newProductType'];
+    $cost = $_POST['newProductCost'];
+    $insurance = $_POST['newProductInsurance'];
+    $fullType = '';
+    if ($type == 'H') $fullType = 'รอก';
+    else if ($type == 'C') $fullType = 'เครน';
+    else if ($type == 'E') $fullType = 'อุปกรณ์อิเล็กทรอนิกส์';
+    else if ($type == 'O') $fullType = 'อุปกรณ์อื่นๆ';
+    $sql = "insert into product values(NULL,'$name','$type','$fullType','$cost',0,'$img','$insurance')";
+
+    $query = mysqli_query($conn, $sql); 

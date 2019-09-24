@@ -1,0 +1,38 @@
+﻿<script>
+$(document).ready(()=>{
+	$('#reportContentList').DataTable();
+})
+</script>
+
+<body>
+	<table id="reportContentList" class="table table-bordered rounded">
+    <thead>
+    <tr>
+        <th>วันที่นำเข้า</th>
+        <th>ลำดับนำเข้า</th>
+        <th>รหัสผู้จัดจำหน่าย</th>
+        <th>ชื่อผู้จัดจำหน่าย</th>
+        <th>เบอร์ผู้จัดจำหน่าย</th>
+        <th>ยอดชำระรวม</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    while ($temp = mysqli_fetch_array($result)) {
+        ?>
+        <tr>
+            <td><?php echo $temp['import_date'] ?></td>
+            <td><?php echo $temp['import_no'] ?></td>
+            <td><?php echo $temp['supplier_id'] ?></td>
+            <td><?php echo $temp['name'] ?></td>
+            <td><?php echo $temp['tel'] ?></td>
+            <td><?php echo $temp['total_cost'] ?></td>
+            <td><a class="btn btn-sm btn-primary text-white" onclick="selectImportDetail('<?php echo $temp['import_no']?>')"><i class="fa fa-list"></i> ดูรายละเอียด</a></td>
+        </tr>
+        <?php
+    }
+    ?>
+    </tbody>
+</table>
+</body>

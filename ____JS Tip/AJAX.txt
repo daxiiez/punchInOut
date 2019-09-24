@@ -1,0 +1,25 @@
+$.ajax({
+                url:"./SQL_Insert/insertServiceList.php",
+                data:serviceDetail, // JSON Object
+                type:'post', // get
+                dataType:'json',
+                beforeSend:()=>{},
+                success:r=>{
+             	 },
+                error:e=>{
+                    alert("");
+                }
+            });
+====================================================
+
+$.get("./SQL_Select/selectCustomerById.php?id=" + id, r => {
+
+        })
+
+=====================================================
+
+$.post("./SQL_Select/updateCustomerById.php",jsonObj, r => {
+
+        })
+
+====================================================

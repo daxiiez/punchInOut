@@ -1,0 +1,8 @@
+{
+    "require": {
+        "mpdf/mpdf": "^7.1",
+        "hutnikau/job-scheduler": "^0.4.1",
+      "ext-mysqli": "*",
+      "ext-json": "*"
+    }
+}
