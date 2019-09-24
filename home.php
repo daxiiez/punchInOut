@@ -20,29 +20,33 @@ include '__navbar_admin.php';
     <div class="card">
         <div class="card-header">
             <nav aria-label="breadcrumb  bg-dark">
-                <h5></h5>
+                <marquee>Test</marquee>
             </nav>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <div  align="center">
-                        <div class="img-area" style="width: 400px;">
-                            <img src="img/icon/insurance.png" style="width: 400px;" class="image">
-                            <div class="overlay bg-warning rounded">
-                                <div class="text">จัดการพนักงาน</div>
+                    <div align="center">
+                        <a href="officer.php">
+                            <div class="img-area" style="width: 400px;">
+                                <img src="img/icon/staff.png" style="width: 400px;" class="image">
+                                <div class="overlay bg-warning rounded">
+                                    <div class="text">จัดการพนักงาน</div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col">
-                    <div  align="center">
-                        <div class="img-area" style="width: 400px;">
-                            <img src="img/icon/insurance.png" style="width: 400px;" class="image">
-                            <div class="overlay  bg-primary rounded">
-                                <div class="text">เวลาเข้า-ออก</div>
+                    <div align="center">
+                        <a href="transaction.php">
+                            <div class="img-area" style="width: 400px;">
+                                <img src="img/icon/time.png" style="width: 400px;" class="image">
+                                <div class="overlay  bg-primary rounded">
+                                    <div class="text">เวลาเข้า-ออก</div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -52,5 +56,7 @@ include '__navbar_admin.php';
         </div>
     </div>
 </div>
+
+
 </body>
 </html>

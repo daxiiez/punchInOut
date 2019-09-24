@@ -8,6 +8,82 @@ include '__checkSession.php';
 <head>
     <?php include '__header.php'; ?>
     <script>
+        let employeeList,departmentList,positionList;
+        $(document).ready(() => {
+            getDepartmentList();
+            getPositionList();
+            getOfficerList();
+        });
+        let getDepartmentList=()=>{
+            $.get("SQL_Select/selectDepartment.php", null, (data) => {
+                departmentList = JSON.parse(data);
+            });
+        }
+        let getPositionList=()=>{
+            $.get("SQL_Select/selectPosition.php", null, (data) => {
+                positionList = JSON.parse(data);
+            });
+        }
+        let getOfficerList=()=>{
+            $.get("SQL_Select/selectEmployee.php", null, (data) => {
+                employeeList = JSON.parse(data);
+                if(employeeList){
+                    setEmployeeList();
+                }else{
+                    alert("ไม่พบข้อมูล");
+                }
+            });
+        }
+        let setEmployeeList=()=>{
+            let html = "<div class='row'>";
+            employeeList.forEach(f=>{
+                let positionName = positionList.filter(x=>f.position_code == x.position_code)[0].name;
+                let departmentName = departmentList.filter(x=>f.department_code == x.department_code)[0].name;
+            html+="                        <div class='col-3'>" +
+                "                            <div class='card'>" +
+                "                                <div class='card-header'><strong>รหัส : "+f.emp_id+"</strong></div>" +
+                "                                <div class='card-body'>" +
+                "                                    <table class='table'>" +
+                "                                        <tr>" +
+                "                                            <td colspan='2'>" +
+                "                                               <img  class='card-img-top' width='100%'" +
+                "                                                     border='5'" +
+                "                                                     name='imageShow'" +
+                "                                                     src='data:image/jpeg;base64,"+f.emp_pic+"'>" +
+                "                                           </td>" +
+                "                                        </tr>" +
+                "                                        <tr>" +
+                "                                            <th>ชื่อ</th>" +
+                "                                            <td>"+f.emp_name+"</td>" +
+                "                                        </tr>" +
+                "                                        <tr>" +
+                "                                            <th>เบอร์โทร</th>" +
+                "                                            <td>"+f.emp_tel+"</td>" +
+                "                                        </tr>" +
+                "                                        <tr>" +
+                "                                            <th>ตำแหน่ง</th>" +
+                "                                            <td>"+positionName+"</td>" +
+                "                                        </tr>" +
+                "                                        <tr>" +
+                "                                        </tr>" +
+                "                                    </table>" +
+                "                                </div>" +
+                "                                <div class='card-footer'>" +
+                "                                    <button onclick='viewEmployeeDetail("+f.emp_id+")' class='btn-block btn btn-outline-info'>" +
+                "                                        ดู/แก้ไข ข้อมูลพนักงาน" +
+                "                                    </button>" +
+                "                                </div>" +
+                "                            </div>" +
+                "                        </div>";
+            });
+            html+=   "                    </div>";
+            $("#employeeList").html(html);
+        }
+
+        function viewEmployeeDetail(emp_id){
+            let em = employeeList.filter(f=>f.emp_id == emp_id)[0];
+            console.log("em " ,em);
+        }
 
     </script>
 </head>
@@ -31,7 +107,7 @@ include '__navbar_admin.php';
                         <div class="col">
                             <div class="form-group">
                                 <label>ชื่อ</label>
-                                <input class="form-control"  id="emId" name="emId">
+                                <input class="form-control" id="emId" name="emId">
                             </div>
                         </div>
                         <div class="col">
@@ -45,7 +121,9 @@ include '__navbar_admin.php';
                 <div class="card-footer">
                     <div class="btn-group">
                         <button class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>
-                        <button class="btn btn-outline-success"><i class="fa fa-plus"></i> เพิ่ม</button>
+                        <button class="btn btn-outline-success" data-toggle="modal" data-target="#addEmployeeModal"><i
+                                    class="fa fa-plus"></i> เพิ่ม
+                        </button>
                     </div>
                 </div>
             </div>
@@ -53,36 +131,6 @@ include '__navbar_admin.php';
             <div class="card">
                 <div class="card-header"><strong>รายการพนักงาน</strong></div>
                 <div class="card-body" id="employeeList">
-                    <div class="row" >
-                        <div class="col-3">
-                            <div class="card">
-                                <div class="card-header"><strong>รหัส : xxxxx</strong></div>
-                                <div class="card-body">
-                                    <table class="table">
-                                        <tr>
-                                            <th>ชื่อ</th>
-                                            <td>xxx</td>
-                                        </tr>
-                                        <tr>
-                                            <th>เบอร์โทร</th>
-                                            <td>xxx</td>
-                                        </tr>
-                                        <tr>
-                                            <th>ตำแหน่ง</th>
-                                            <td>xxx</td>
-                                        </tr>
-                                        <tr>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="card-footer">
-                                        <button class="btn-block btn btn-outline-info">
-                                            ดู/แก้ไข ข้อมูลพนักงาน
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -92,6 +140,63 @@ include '__navbar_admin.php';
     </div>
 </div>
 
+
+<div class="modal fade " id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEmployeeLabel"><i class="fa fa-print"></i> รายละเอียดการจอง</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form name="addEmployeeForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>Label</label>
+                                            <input name="emName" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>Label</label>
+                                            <input class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>Label</label>
+                                            <input class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>Label</label>
+                                            <input class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
