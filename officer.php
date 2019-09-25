@@ -212,6 +212,7 @@ include '__navbar_admin.php';
                             <button class="btn btn-primary" type="button"><i class="fa fa-search"></i> ค้นหา</button>
                             <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#addEmployeeModal">
                                 <i class="fa fa-plus"></i> เพิ่ม
+                                
                             </button>
                         </div>
                     </div>
