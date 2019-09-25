@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8682069-08d5-4386-816a-a81053bc591b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SQL_Select/selectDepartment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQL_Select/selectPosition.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SQL_Update/updateEmployee.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL_Select/getImageByRoomId.php" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Select/getImageByRoomId.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL_Insert/insertEmployee.php" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Insert/insertEmployee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL_Select/selectEmployee.php" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Select/selectEmployee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__navbar_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/__navbar_admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/officer.php" beforeDir="false" afterPath="$PROJECT_DIR$/officer.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -67,67 +67,74 @@
         <item name="punchtime: schema" type="ebfa3cd1:MariaImplModel$Schema" />
         <item name="position: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="punchtime" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="punchtime: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="punchtime: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/home.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/officer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75">
-              <caret line="82" column="44" selection-start-line="82" selection-start-column="44" selection-end-line="82" selection-end-column="44" />
+            <state relative-caret-position="52">
+              <caret line="359" column="72" lean-forward="true" selection-start-line="359" selection-start-column="72" selection-end-line="359" selection-end-column="72" />
               <folding>
-                <element signature="e#171#195#0#HTML" />
-                <element signature="e#277#301#0#HTML" />
-                <element signature="e#342#366#0#HTML" />
-                <element signature="e#278#573#0#HTML" />
+                <element signature="e#3122#6842#0#HTML" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#src#0;n#img#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#7043#7581#0#HTML" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__header.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SQL_Update/updateEmployee.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2033" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__navbar_admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+            <state relative-caret-position="476">
+              <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SQL_Select/selectPosition.php">
+        <entry file="file://$PROJECT_DIR$/SQL_Insert/insertEmployee.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            <state relative-caret-position="244">
+              <caret line="23" selection-start-line="23" selection-end-line="25" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="17950" column="12" selection-start-line="17950" selection-start-column="12" selection-end-line="17950" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SQL_Select/selectEmployee.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4af3df69-ad08-420e-90bf-8eaa15ebbfe3/console.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="30" selection-start-line="30" selection-end-line="38" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -142,28 +149,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/jquery-3.3.1.js">
+        <entry file="file://$PROJECT_DIR$/__navbar_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="9343" selection-start-line="9343" selection-end-line="9343" />
+            <state relative-caret-position="454">
+              <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SQL_Select/selectEmployee.php">
+        <entry file="file://$PROJECT_DIR$/home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="36" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="36" />
+            <state relative-caret-position="-209">
+              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SQL_Select/getImageByRoomId.php">
+        <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="9" selection-end-column="26" />
+            <state relative-caret-position="323">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -175,6 +182,10 @@
       <find>__login</find>
       <find>\&quot;</find>
       <find>\n</find>
+      <find>positionList</find>
+      <find>departmentList</find>
+      <find>imgInp</find>
+      <find>update_imgInp</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -192,15 +203,20 @@
         <option value="$PROJECT_DIR$/__book_detail_modal.php" />
         <option value="$PROJECT_DIR$/__connect.php" />
         <option value="$PROJECT_DIR$/transaction.php" />
-        <option value="$PROJECT_DIR$/__navbar_admin.php" />
-        <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/SQL_Select/getImageByRoomId.php" />
         <option value="$PROJECT_DIR$/SQL_Select/selectAllEmployee.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4af3df69-ad08-420e-90bf-8eaa15ebbfe3/console.sql" />
         <option value="$PROJECT_DIR$/SQL_Select/selectDepartment.php" />
         <option value="$PROJECT_DIR$/SQL_Select/selectPosition.php" />
+        <option value="$PROJECT_DIR$/home.php" />
+        <option value="$PROJECT_DIR$/__checkSession.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/SQL_Select/selectTowerList.php" />
+        <option value="$PROJECT_DIR$/__navbar_admin.php" />
+        <option value="$PROJECT_DIR$/SQL_Select/selectEmployee.php" />
+        <option value="$PROJECT_DIR$/SQL_Insert/insertEmployee.php" />
         <option value="$PROJECT_DIR$/officer.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4af3df69-ad08-420e-90bf-8eaa15ebbfe3/console.sql" />
+        <option value="$PROJECT_DIR$/SQL_Update/updateEmployee.php" />
       </list>
     </option>
   </component>
@@ -219,16 +235,16 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="y" value="515" />
+    <option name="x" value="-9" />
     <option name="width" value="978" />
-    <option name="height" value="524" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -239,13 +255,37 @@
             <path>
               <item name="punchInOut" type="b2602c69:ProjectViewProjectNode" />
               <item name="punchInOut" type="462c0819:PsiDirectoryNode" />
+              <item name="SQL_Insert" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="punchInOut" type="b2602c69:ProjectViewProjectNode" />
+              <item name="punchInOut" type="462c0819:PsiDirectoryNode" />
               <item name="SQL_Select" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="punchInOut" type="b2602c69:ProjectViewProjectNode" />
+              <item name="punchInOut" type="462c0819:PsiDirectoryNode" />
+              <item name="SQL_Update" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="punchInOut" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="punchInOut" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Database Consoles" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+            <path>
+              <item name="punchInOut" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Database Consoles" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="4af3df69-ad08-420e-90bf-8eaa15ebbfe3" type="1e004dc1:ScratchProjectViewPane$MyRootNode$1$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -255,10 +295,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.console.LAST_STATE" value="true" />
-    <property name="database.data.extractors.current.id" value="SQL Inserts" />
+    <property name="database.data.extractors.current.id" value="SQL Updates" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -286,7 +327,9 @@
       <workItem from="1569324228863" duration="719000" />
       <workItem from="1569325024451" duration="9640000" />
       <workItem from="1569338954698" duration="8000" />
-      <workItem from="1569340516104" duration="7808000" />
+      <workItem from="1569340516104" duration="8159000" />
+      <workItem from="1569408762807" duration="12948000" />
+      <workItem from="1569452009278" duration="3449000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1569340078772</created>
@@ -295,17 +338,38 @@
       <option name="project" value="LOCAL" />
       <updated>1569340078772</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="first commit">
+      <created>1569351494534</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1569351494534</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update">
+      <created>1569351781750</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569351781750</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit">
+      <created>1569422048416</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569422048416</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19479000" />
+    <option name="totallyTimeSpent" value="36227000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22147651" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16912752" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -323,14 +387,14 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Database Console" order="12" visible="true" weight="0.1756374" />
+      <window_info anchor="bottom" id="Database Console" order="12" visible="true" weight="0.3696884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Maven" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.13087249" />
+      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.19798657" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,25 +402,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="update" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin.php" />
-    <entry file="file://$PROJECT_DIR$/template/admin_header.php" />
-    <entry file="file://$PROJECT_DIR$/name_list.php" />
-    <entry file="file://$PROJECT_DIR$/punchInOut.iml" />
-    <entry file="file://$PROJECT_DIR$/template/footer.php" />
-    <entry file="file://$PROJECT_DIR$/emp_add.php" />
-    <entry file="file://$PROJECT_DIR$/template/admin_menu.php" />
-    <entry file="file://$PROJECT_DIR$/connect.php" />
-    <entry file="file://$PROJECT_DIR$/login_sql.php" />
     <entry file="file://$PROJECT_DIR$/__book_detail_modal.php" />
-    <entry file="file://$PROJECT_DIR$/__checkSession.php" />
     <entry file="file://$PROJECT_DIR$/template.php" />
     <entry file="file://$PROJECT_DIR$/transaction.php" />
     <entry file="file://$PROJECT_DIR$/composer.lock" />
     <entry file="file://$PROJECT_DIR$/composer.json" />
-    <entry file="file://$PROJECT_DIR$/__connect.php" />
     <entry file="file://$PROJECT_DIR$/__logout.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -380,15 +435,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/bg2.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="das://4af3df69-ad08-420e-90bf-8eaa15ebbfe3/schema/punchtime/table/employee">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true">
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/img/icon/insurance.png">
       <provider selected="true" editor-type-id="images" />
@@ -450,31 +496,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4af3df69-ad08-420e-90bf-8eaa15ebbfe3/console.sql">
+    <entry file="file://$PROJECT_DIR$/__checkSession.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SQL_Select/getImageByRoomId.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SQL_Select/selectEmployee.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="36" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="36" />
+        <state relative-caret-position="34">
+          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery-3.3.1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
+        <state relative-caret-position="158627">
           <caret line="9343" selection-start-line="9343" selection-end-line="9343" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQL_Select/selectUserByUsername.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Select/selectTowerList.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Select/getPayImg.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Select/checkPassword.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Select/selectRoomBookedList.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Select/getImageByRoomId.php" />
+    <entry file="file://$PROJECT_DIR$/img/icon/staff.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQL_Insert/insertImportList.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Insert/insertBookDetail.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Update/updateImage.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Update/insertImage.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Delete/deleteBooking.php" />
+    <entry file="file://$PROJECT_DIR$/SQL_Delete/deleteImg.php" />
+    <entry file="file://$PROJECT_DIR$/__connect.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://4af3df69-ad08-420e-90bf-8eaa15ebbfe3/schema/punchtime/table/employee">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQL_Select/selectPosition.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -485,51 +558,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SQL_Select/selectPosition.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/officer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75">
-          <caret line="82" column="44" selection-start-line="82" selection-start-column="44" selection-end-line="82" selection-end-column="44" />
-          <folding>
-            <element signature="e#171#195#0#HTML" />
-            <element signature="e#277#301#0#HTML" />
-            <element signature="e#342#366#0#HTML" />
-            <element signature="e#278#573#0#HTML" />
-            <element signature="n#src#0;n#img#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/__header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2033" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/__navbar_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+        <state relative-caret-position="323">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+        <state relative-caret-position="-209">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="17950" column="12" selection-start-line="17950" selection-start-column="12" selection-end-line="17950" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__navbar_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/officer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="359" column="72" lean-forward="true" selection-start-line="359" selection-start-column="72" selection-end-line="359" selection-end-column="72" />
+          <folding>
+            <element signature="e#3122#6842#0#HTML" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#src#0;n#img#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#7043#7581#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQL_Select/selectEmployee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4af3df69-ad08-420e-90bf-8eaa15ebbfe3/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="30" selection-start-line="30" selection-end-line="38" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQL_Insert/insertEmployee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="23" selection-start-line="23" selection-end-line="25" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQL_Update/updateEmployee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
         </state>
       </provider>
     </entry>

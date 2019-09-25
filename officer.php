@@ -11,11 +11,15 @@ include '__checkSession.php';
         let employeeList, departmentList, positionList;
         let imgFile;
         $(document).ready(() => {
+            $("#emp_card_id").mask("9999999999999");
+            $("#emp_tel").mask("9999999999");
+            $("#emp_card_id").mask("9999999999999");
+            $("#emp_tel").mask("9999999999");
             setDatePicker();
             getDepartmentList();
             getPositionList();
             setTimeout(() => {
-                getOfficerList();
+                getOfficerList(false);
             }, 500);
 
             function readURL(input, id) {
@@ -40,6 +44,10 @@ include '__checkSession.php';
             $("#imgInp").change(function () {
                 readURL(this, '#img-upload');
             });
+
+            $("#update_imgInp").change(function () {
+                readURL(this, '#update_img-upload');
+            });
         });
 
         function setDatePicker() {
@@ -48,6 +56,10 @@ include '__checkSession.php';
                 format: 'dd/mm/yyyy'
             });
         };
+
+        function validateFrom(obj) {
+
+        }
 
         function getDepartmentList() {
             $.get("SQL_Select/selectDepartment.php", null, (data) => {
@@ -76,8 +88,17 @@ include '__checkSession.php';
             });
         };
 
-        function getOfficerList() {
-            $.get("SQL_Select/selectEmployee.php", null, (data) => {
+        function getOfficerList(isSearch) {
+            let searchCriteria = null;
+            if (isSearch) {
+                searchCriteria = arrayToObject($("#searchForm").serializeArray().map((m) => {
+                    let v = m;
+                    v.value = v.value.trim();
+                    return v;
+                }));
+                searchCriteria["search"] = true;
+            }
+            $.get("SQL_Select/selectEmployee.php", searchCriteria, (data) => {
                 employeeList = JSON.parse(data);
                 if (employeeList) {
                     setEmployeeList();
@@ -139,21 +160,28 @@ include '__checkSession.php';
 
         function viewEmployeeDetail(emp_id) {
             let em = employeeList.filter(f => f.emp_id == emp_id)[0];
-            console.log("em ", em);
+            _.mapValues(em, (v, k) => {
+                try {
+                    $("#update_" + k).val(v);
+                } catch (e) {
+                }
+            });
+
+            $('#updateEmployeeModal').modal('toggle');
         };
 
         function insertEmployee() {
             console.log("Insert Employee")
             let employeeObj = arrayToObject($("#addEmployeeForm").serializeArray());
             employeeObj["emp_pic"] = imgFile;
-            console.log("employeeObj : ", employeeObj);
             $.post("SQL_Insert/insertEmployee.php", employeeObj, (result) => {
-                result += "";
+                // result += "";
+                // console.log(result)
                 if (result == "result" || result == true) {
                     alert("เพิ่มข้อมูลพนักงานสำเร็จ!");
                     location.reload();
                 }
-            })
+            });
         }
 
     </script>
@@ -178,7 +206,7 @@ include '__navbar_admin.php';
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label>ชื่อ</label>
+                                    <label>รหัส</label>
                                     <input class="form-control" id="search_emp_id" name="search_emp_id">
                                 </div>
                             </div>
@@ -209,10 +237,13 @@ include '__navbar_admin.php';
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <button class="btn btn-primary" type="button"><i class="fa fa-search"></i> ค้นหา</button>
-                            <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#addEmployeeModal">
+                            <button class="btn btn-primary" onclick="getOfficerList(true)" type="button"><i
+                                        class="fa fa-search"></i> ค้นหา
+                            </button>
+                            <button class="btn btn-outline-success" type="button" data-toggle="modal"
+                                    data-target="#addEmployeeModal">
                                 <i class="fa fa-plus"></i> เพิ่ม
-                                
+
                             </button>
                         </div>
                     </div>
@@ -337,12 +368,149 @@ include '__navbar_admin.php';
                                     <div class="col-4">
                                         <div align="center">
                                             <label>รูปภาพ</label>
-                                            <img id="img-upload" src="img/icon/staff.png" width="200" border="5">
+                                            <div id="imgArea">
+                                                <img id="img-upload" src="img/icon/staff.png" width="200" border="5">
+                                            </div>
                                             <hr>
                                             <div class="btn-block">
                                                 <button class="btn btn-sm btn-file btn-outline-info"><i
                                                             class="fa fa-image"></i> เลือกรูปภาพ
                                                     <input type="file" name="imgInp" id="imgInp"
+                                                           required>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-block">
+                        <button type="button" onclick="insertEmployee()" class="btn btn-primary"><i
+                                    class="fa fa-save"></i> บันทึก
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateEmployeeModal" role="dialog" aria-labelledby="updateEmployeeModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form name="updateEmployeeForm" id="updateEmployeeForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateEmployeeLabel"><i class="fa fa-edit"></i> แก้ไขรายชื่อพนักงาน</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>ชื่อ-สกุล</label>
+                                                    <input name="update_emp_name" id="update_emp_name"
+                                                           class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>รหัสบัตรประชาชน</label>
+                                                    <input name="update_emp_card_id" id="update_emp_card_id"
+                                                           class="form-control"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label>เบอร์โทรศัพท์</label>
+                                                    <input name="update_emp_tel" id="update_emp_tel"
+                                                           class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>เพศ</label>
+                                                    <select name="update_emp_gender" id="update_emp_gender"
+                                                            class="form-control"
+                                                            required>
+                                                        <option value="ชาย">ชาย</option>
+                                                        <option value="หญิง">หญิง</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label>วันที่เริ่ม</label>
+                                                    <input name="update_emp_start_date" id="update_emp_start_date"
+                                                           class="form-control"
+                                                           placeholder="ยังไม่ได้เลือกวันที่" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>เงินเดือน</label>
+                                                    <input type="number" name="update_emp_salaly" id="update_emp_salaly"
+                                                           class="form-control"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>ตำแหน่ง</label>
+                                                    <select class="form-control" id="update_position_code"
+                                                            name="update_position_code">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>แผนก</label>
+                                                    <select class="form-control" id="update_department_code"
+                                                            name="update_department_code">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>ที่อยู่</label>
+                                                    <textarea name="update_emp_address" id="update_emp_address"
+                                                              class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div align="center">
+                                            <label>รูปภาพ</label>
+                                            <div id="imgArea">
+                                                <img id="update_img-upload" src="img/icon/staff.png" width="200"
+                                                     border="5">
+                                            </div>
+                                            <hr>
+                                            <div class="btn-block">
+                                                <button class="btn btn-sm btn-file btn-outline-info"><i
+                                                            class="fa fa-image"></i> เลือกรูปภาพ
+                                                    <input type="file" name="update_imgInp" id="update_imgInp"
                                                            required>
                                                 </button>
                                             </div>

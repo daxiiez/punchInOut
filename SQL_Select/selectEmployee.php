@@ -14,7 +14,25 @@ $sql = "select emp_id,
        emp_typeuser,
        position_code,
        department_code
-from employee";
+from employee where 1=1 ";
+
+if(isset($_GET['search'])){
+    if($_GET['search_emp_id']!=''){
+        $sql .= " and emp_id like '%".$_GET['search_emp_id']."%'";
+    }
+    if($_GET['search_emp_name']!=''){
+        $sql .= " and emp_name like '%".$_GET['search_emp_name']."%'";
+    }
+    if($_GET['search_position_code']!=''){
+        $sql .= " and position_code ='".$_GET['search_position_code']."'";
+    }
+    if($_GET['search_department_code']!=''){
+        $sql .= " and department_code ='".$_GET['search_department_code']."'";
+    }
+}
+
+//echo $sql;
+
 $query = mysqli_query($conn,$sql);
 $dbdata = array();
 while ( $temp = mysqli_fetch_array($query,MYSQLI_ASSOC))  {

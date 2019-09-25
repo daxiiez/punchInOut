@@ -23,5 +23,5 @@ VALUES (null, '$emp_name', '$emp_card_id', '$emp_address', '$emp_tel', '$emp_gen
 
 $query = mysqli_query($conn, $sql);
 
-echo json_encode($query);
+echo $query;
 ?>

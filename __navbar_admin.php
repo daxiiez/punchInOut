@@ -25,14 +25,14 @@
         </ul>
         <ul class="navbar-nav">
             <?php
-            if (isset($_SESSION['username'])) {
+            if (isset($_SESSION['emp_username'])) {
                 ?>
                 <li class="nav-item dropdown" style="cursor: pointer;">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <!--img-->
                         <?php
-                        echo $_SESSION['username'];
+                        echo $_SESSION['emp_username'];
                         ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
