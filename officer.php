@@ -10,13 +10,19 @@ include '__checkSession.php';
     <script>
         let employeeList, departmentList, positionList;
         let imgFile;
+        let imgUploadFile;
+        let updateEmpId;
+
         $(document).ready(() => {
             $("#emp_card_id").mask("9999999999999");
             $("#emp_tel").mask("9999999999");
-            $("#emp_card_id").mask("9999999999999");
+            $("#emp_salaly").mask("999999");
+            $("#update_emp_salaly").mask("99999");
             $("#emp_tel").mask("9999999999");
+            $("#update_emp_card_id").mask("9999999999999");
+            $("#update_emp_tel").mask("9999999999");
             setDatePicker();
-            getDepartmentList();
+            // getDepartmentList();
             getPositionList();
             setTimeout(() => {
                 getOfficerList(false);
@@ -27,6 +33,7 @@ include '__checkSession.php';
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         imgFile = e.target.result.replace(/^data:image\/[a-z]+;base64,/, "");
+                        imgUploadFile = e.target.result.replace(/^data:image\/[a-z]+;base64,/, "");
                         $(id).attr('src', e.target.result);
                     }
                     reader.readAsDataURL(input.files[0]);
@@ -58,10 +65,14 @@ include '__checkSession.php';
         };
 
         function validateFrom(obj) {
-
+            console.log(obj);
+            for (let i in obj) {
+                if (!obj[i]) return false;
+            }
+            return true;
         }
 
-        function getDepartmentList() {
+       /* function getDepartmentList() {
             $.get("SQL_Select/selectDepartment.php", null, (data) => {
                 departmentList = JSON.parse(data);
                 let departmentListTxt = "";
@@ -69,11 +80,11 @@ include '__checkSession.php';
                     departmentListTxt += "<option value='" + f.department_code + "'>" + f.name + "</option>"
                 })
                 $("#department_code").html(departmentListTxt);
+                $("#update_department_code").html(departmentListTxt);
                 departmentListTxt = "<option value=''>-- เลือกตำแหน่ง --</option>" + departmentListTxt;
                 $("#search_department_code").html(departmentListTxt);
-
             });
-        };
+        };*/
 
         function getPositionList() {
             $.get("SQL_Select/selectPosition.php", null, (data) => {
@@ -83,6 +94,7 @@ include '__checkSession.php';
                     positionListTxt += "<option value='" + f.position_code + "'>" + f.name + "</option>"
                 })
                 $("#position_code").html(positionListTxt);
+                $("#update_position_code").html(positionListTxt);
                 positionListTxt = "<option value=''>-- เลือกตำแหน่ง --</option>" + positionListTxt;
                 $("#search_position_code").html(positionListTxt);
             });
@@ -109,81 +121,82 @@ include '__checkSession.php';
         };
 
         function setEmployeeList() {
-            let html = "<div class='row'>";
+            let html = " <tr class='bg-info text-white'>\n" +
+                "                            <th>รหัส</th>\n" +
+                "                            <th>ชื่อ</th>\n" +
+                "                            <th>เบอร์โทรศัพท์</th>\n" +
+                "                            <th>ตำแหน่ง</th>\n" +
+                // "                            <th>แผนก</th>\n" +
+                "                            <th></th>\n" +
+                "                        </tr >";
             employeeList.forEach(f => {
                 let positionName = positionList.filter(x => f.position_code == x.position_code)[0].name;
-                let departmentName = departmentList.filter(x => f.department_code == x.department_code)[0].name;
-                html += "                        <div class='col-3' style='margin-bottom: 10px;'>" +
-                    "                            <div class='card'>" +
-                    "                                <div class='card-header'><strong>รหัส : " + f.emp_id + "</strong></div>" +
-                    "                                <div class='card-body'>" +
-                    "                                    <table class='table'>" +
-                    "                                        <tr>" +
-                    "                                            <td colspan='2'>" +
-                    "                                               <img  class='card-img-top' width='100%'" +
-                    "                                                     border='5'" +
-                    "                                                     name='imageShow'" +
-                    "                                                     src='data:image/jpeg;base64," + f.emp_pic + "'>" +
-                    "                                           </td>" +
-                    "                                        </tr>" +
-                    "                                        <tr>" +
-                    "                                            <th>ชื่อ</th>" +
+                // let departmentName = departmentList.filter(x => f.department_code == x.department_code)[0].name;
+                html += " <tr> " +
+                    "                                            <td>" + f.emp_id + "</td>" +
                     "                                            <td>" + f.emp_name + "</td>" +
-                    "                                        </tr>" +
-                    "                                        <tr>" +
-                    "                                            <th>เบอร์โทร</th>" +
                     "                                            <td>" + f.emp_tel + "</td>" +
-                    "                                        </tr>" +
-                    "                                        <tr>" +
-                    "                                            <th>ตำแหน่ง</th>" +
                     "                                            <td>" + positionName + "</td>" +
-                    "                                        </tr>" +
-                    "                                        <tr>" +
-                    "                                            <th>แผนก</th>" +
-                    "                                            <td>" + departmentName + "</td>" +
-                    "                                        </tr>" +
-                    "                                        <tr>" +
-                    "                                        </tr>" +
-                    "                                    </table>" +
-                    "                                </div>" +
-                    "                                <div class='card-footer'>" +
+                    // "                                            <td>" + departmentName + "</td>" +
+                    "                                            <td>" +
                     "                                    <button onclick='viewEmployeeDetail(" + f.emp_id + ")' class='btn-block btn btn-outline-info'>" +
                     "                                        ดู/แก้ไข ข้อมูลพนักงาน" +
                     "                                    </button>" +
-                    "                                </div>" +
-                    "                            </div>" +
-                    "                        </div>";
+                    "</td>" +
+                    "                                        </tr>";
             });
-            html += "                    </div>";
             $("#employeeList").html(html);
         };
 
         function viewEmployeeDetail(emp_id) {
             let em = employeeList.filter(f => f.emp_id == emp_id)[0];
+            updateEmpId = emp_id;
+            let img = "";
             _.mapValues(em, (v, k) => {
                 try {
                     $("#update_" + k).val(v);
+                    if (k == "emp_pic") {
+                        imgUploadFile = v;
+                        img = "<img id='update_img-upload' src='data:image/jpeg;base64," + v + "' width='50%'>";
+                        $("#imgAreaUpload").html(img);
+                    }
                 } catch (e) {
                 }
             });
 
             $('#updateEmployeeModal').modal('toggle');
-        };
+        }
 
         function insertEmployee() {
-            console.log("Insert Employee")
+            console.log("Insert Employee");
             let employeeObj = arrayToObject($("#addEmployeeForm").serializeArray());
             employeeObj["emp_pic"] = imgFile;
-            $.post("SQL_Insert/insertEmployee.php", employeeObj, (result) => {
-                // result += "";
-                // console.log(result)
+            if (validateFrom(employeeObj)) {
+                $.post("SQL_Insert/insertEmployee.php", employeeObj, (result) => {
+                    // result += "";
+                    // console.log(result)
+                    if (result == "result" || result == true) {
+                        alert("เพิ่มข้อมูลพนักงานสำเร็จ!");
+                        location.reload();
+                    }
+                });
+            } else {
+                alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+            }
+        }
+
+        function updateEmployee() {
+            let updateObj = arrayToObject($("#updateEmployeeForm").serializeArray());
+            updateObj["update_emp_pic"] = imgUploadFile;
+            updateObj["update_emp_id"] = updateEmpId;
+            console.log(updateObj);
+            $.post("SQL_Update/updateEmployee.php", updateObj, (result) => {
                 if (result == "result" || result == true) {
-                    alert("เพิ่มข้อมูลพนักงานสำเร็จ!");
-                    location.reload();
+                    alert("แก้ไขข้อมูลพนักกงานสำเร็จ!");
+                    getOfficerList()
                 }
             });
         }
-
     </script>
 </head>
 <body>
@@ -201,7 +214,7 @@ include '__navbar_admin.php';
         <div class="card-body">
             <form name="searchForm" id="searchForm">
                 <div style="margin-bottom: 50px;" class="card">
-                    <div class="card-header">ค้นหา</div>
+                    <div class="card-header"><strong>ค้นหา</strong></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
@@ -224,14 +237,14 @@ include '__navbar_admin.php';
                                     </select>
                                 </div>
                             </div>
-                            <div class="col">
+                            <!--<div class="col">
                                 <div class="form-group">
                                     <label>แผนก</label>
                                     <select class="form-control" id="search_department_code"
                                             name="search_department_code">
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
 
                     </div>
@@ -251,7 +264,13 @@ include '__navbar_admin.php';
             </form>
             <div class="card">
                 <div class="card-header"><strong>รายการพนักงาน</strong></div>
-                <div class="card-body" id="employeeList">
+                <div class="card-body">
+                    <table class="table table-bordered" id="employeeList">
+
+                        <tr>
+
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -323,8 +342,10 @@ include '__navbar_admin.php';
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label>วันที่เริ่ม</label>
-                                                    <input name="emp_start_date" id="emp_start_date"
+                                                    <input name="emp_start_date"
+                                                           id="emp_start_date"
                                                            class="form-control"
+                                                           readonly
                                                            placeholder="ยังไม่ได้เลือกวันที่" required>
                                                 </div>
                                             </div>
@@ -346,14 +367,14 @@ include '__navbar_admin.php';
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <!--<div class="col-6">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
                                                     <select class="form-control" id="department_code"
                                                             name="department_code">
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
@@ -459,6 +480,7 @@ include '__navbar_admin.php';
                                                     <label>วันที่เริ่ม</label>
                                                     <input name="update_emp_start_date" id="update_emp_start_date"
                                                            class="form-control"
+                                                           readonly
                                                            placeholder="ยังไม่ได้เลือกวันที่" required>
                                                 </div>
                                             </div>
@@ -480,14 +502,14 @@ include '__navbar_admin.php';
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                           <!-- <div class="col-6">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
                                                     <select class="form-control" id="update_department_code"
                                                             name="update_department_code">
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
@@ -502,7 +524,7 @@ include '__navbar_admin.php';
                                     <div class="col-4">
                                         <div align="center">
                                             <label>รูปภาพ</label>
-                                            <div id="imgArea">
+                                            <div id="imgAreaUpload">
                                                 <img id="update_img-upload" src="img/icon/staff.png" width="200"
                                                      border="5">
                                             </div>
@@ -523,7 +545,7 @@ include '__navbar_admin.php';
                 </div>
                 <div class="modal-footer">
                     <div class="btn-block">
-                        <button type="button" onclick="insertEmployee()" class="btn btn-primary"><i
+                        <button type="button" onclick="updateEmployee()" class="btn btn-primary"><i
                                     class="fa fa-save"></i> บันทึก
                         </button>
                     </div>

@@ -35,10 +35,10 @@
                         echo $_SESSION['emp_username'];
                         ?>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                   <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="__register.php?viewProfile=1">
                             <i class="fa fa-user-circle-o"></i> Profile</a>
-                    </div>
+                    </div>-->
                 </li>
 
                 <li class="nav-item">
@@ -46,26 +46,7 @@
                 </li>
                 <?php
             } ?>
-        <!--    <?php
-/*
 
-            if (isset($_SESSION['username'])) {
-                */?>
-                <li class="nav-item">
-                    <a class="nav-link" href="__logout.php">ออกจากระบบ</a>
-                </li>
-                <?php
-/*            } else {
-                */?>
-                <li class="nav-item">
-                    <div class="btn-group">
-                        <a class="nav-link btn btn-primary" href="__login.php">เข้าสู่ระบบ</a>
-                        <a class="nav-link btn btn-info" href="__register.php">สมัครสมาชิก</a>
-                    </div>
-                </li>
-                --><?php
-/*            }
-            */?>
         </ul>
     </div>
 </nav>

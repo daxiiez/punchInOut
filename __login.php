@@ -17,7 +17,6 @@ if (isset($_POST['username'])) {
         $sql = "SELECT * FROM rental_detail WHERE username ='$username' order by rental_id desc";
         $query = mysqli_query($conn,$sql);
         $rental = mysqli_fetch_array($query);
-        $_SESSION['reserveStatus'] = $rental['status'];
         echo "<script> alert('เข้าสู่ระบบสำเร็จ'); window.location='index.php'; </script>";
     } else {
         $msg = "<span class='text-danger'><i class='fa fa-times'></i> เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบ username/password อีกครั้ง</span>";
