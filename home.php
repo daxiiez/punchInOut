@@ -49,6 +49,30 @@ include '__navbar_admin.php';
                         </a>
                     </div>
                 </div>
+                <div class="col">
+                    <div align="center">
+                        <a href="device.php">
+                            <div class="img-area" style="width: 400px;">
+                                <img src="img/icon/beacon.png" style="width: 400px;" class="image">
+                                <div class="overlay  bg-success rounded">
+                                    <div class="text">อุปกรณ์</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div align="center">
+                        <a href="department.php">
+                            <div class="img-area" style="width: 400px;">
+                                <img src="img/icon/department.png" style="width: 400px;" class="image">
+                                <div class="overlay  bg-info rounded">
+                                    <div class="text">แผนก</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer bg-warning text-white">

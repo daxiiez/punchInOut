@@ -22,6 +22,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="officer.php">พนักงาน</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="department.php">แผนก</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="device.php">อุปกรณ์</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
             <?php

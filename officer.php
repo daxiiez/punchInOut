@@ -14,6 +14,7 @@ include '__checkSession.php';
         let updateEmpId;
 
         $(document).ready(() => {
+            hideSearch();
             $("#emp_card_id").mask("9999999999999");
             $("#emp_tel").mask("9999999999");
             $("#emp_salaly").mask("999999");
@@ -22,8 +23,8 @@ include '__checkSession.php';
             $("#update_emp_card_id").mask("9999999999999");
             $("#update_emp_tel").mask("9999999999");
             setDatePicker();
-            // getDepartmentList();
-            getPositionList();
+            getDepartmentList();
+            // getPositionList();
             setTimeout(() => {
                 getOfficerList(false);
             }, 500);
@@ -72,7 +73,7 @@ include '__checkSession.php';
             return true;
         }
 
-       /* function getDepartmentList() {
+        function getDepartmentList() {
             $.get("SQL_Select/selectDepartment.php", null, (data) => {
                 departmentList = JSON.parse(data);
                 let departmentListTxt = "";
@@ -84,9 +85,9 @@ include '__checkSession.php';
                 departmentListTxt = "<option value=''>-- เลือกตำแหน่ง --</option>" + departmentListTxt;
                 $("#search_department_code").html(departmentListTxt);
             });
-        };*/
+        };
 
-        function getPositionList() {
+        /*function getPositionList() {
             $.get("SQL_Select/selectPosition.php", null, (data) => {
                 positionList = JSON.parse(data);
                 let positionListTxt = "";
@@ -98,7 +99,7 @@ include '__checkSession.php';
                 positionListTxt = "<option value=''>-- เลือกตำแหน่ง --</option>" + positionListTxt;
                 $("#search_position_code").html(positionListTxt);
             });
-        };
+        };*/
 
         function getOfficerList(isSearch) {
             let searchCriteria = null;
@@ -125,21 +126,21 @@ include '__checkSession.php';
                 "                            <th>รหัส</th>\n" +
                 "                            <th>ชื่อ</th>\n" +
                 "                            <th>เบอร์โทรศัพท์</th>\n" +
-                "                            <th>ตำแหน่ง</th>\n" +
-                // "                            <th>แผนก</th>\n" +
-                "                            <th></th>\n" +
+                // "                            <th>ตำแหน่ง</th>\n" +
+                "                            <th>แผนก</th>\n" +
+                "                            <th>แก้ไข</th>\n" +
                 "                        </tr >";
             employeeList.forEach(f => {
-                let positionName = positionList.filter(x => f.position_code == x.position_code)[0].name;
-                // let departmentName = departmentList.filter(x => f.department_code == x.department_code)[0].name;
+                // let positionName = positionList.filter(x => f.position_code == x.position_code)[0].name;
+                let departmentName = departmentList.filter(x => f.department_code == x.department_code)[0].name;
                 html += " <tr> " +
                     "                                            <td>" + f.emp_id + "</td>" +
                     "                                            <td>" + f.emp_name + "</td>" +
                     "                                            <td>" + f.emp_tel + "</td>" +
-                    "                                            <td>" + positionName + "</td>" +
-                    // "                                            <td>" + departmentName + "</td>" +
+                    // "                                            <td>" + positionName + "</td>" +
+                    "                                            <td>" + departmentName + "</td>" +
                     "                                            <td>" +
-                    "                                    <button onclick='viewEmployeeDetail(" + f.emp_id + ")' class='btn-block btn btn-outline-info'>" +
+                    "                                    <button type='button' onclick='viewEmployeeDetail(" + f.emp_id + ")' class='btn-block btn btn-outline-info'>" +
                     "                                        ดู/แก้ไข ข้อมูลพนักงาน" +
                     "                                    </button>" +
                     "</td>" +
@@ -197,6 +198,14 @@ include '__checkSession.php';
                 }
             });
         }
+
+        function hideSearch() {
+            $("#searchForm").hide();
+        }
+        function showSearch() {
+            $("#searchForm").show();
+        }
+
     </script>
 </head>
 <body>
@@ -208,13 +217,26 @@ include '__navbar_admin.php';
     <div class="card">
         <div class="card-header">
             <nav aria-label="breadcrumb  bg-dark">
-                <h5><strong>จัดการพนักงาน</strong></h5>
+                <h5>
+                    <strong>จัดการพนักงาน</strong>
+                </h5>
             </nav>
         </div>
-        <div class="card-body">
+        <div class="card-body" id="searchArea">
             <form name="searchForm" id="searchForm">
                 <div style="margin-bottom: 50px;" class="card">
-                    <div class="card-header"><strong>ค้นหา</strong></div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>ค้นหา</strong>
+                            </div>
+                            <div class="col-6">
+                                <div align="right">
+                                    <span onclick="hideSearch()" style="cursor: pointer;"><strong>X</strong> ซ่อนการค้นหา</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
@@ -229,49 +251,61 @@ include '__navbar_admin.php';
                                     <input class="form-control" id="search_emp_name" name="search_emp_name">
                                 </div>
                             </div>
+                            <!-- <div class="col">
+                                 <div class="form-group">
+                                     <label>ตำแหน่ง</label>
+                                     <select class="form-control" id="search_position_code"
+                                             name="search_position_code">
+                                     </select>
+                                 </div>
+                             </div>-->
                             <div class="col">
-                                <div class="form-group">
-                                    <label>ตำแหน่ง</label>
-                                    <select class="form-control" id="search_position_code"
-                                            name="search_position_code">
-                                    </select>
-                                </div>
-                            </div>
-                            <!--<div class="col">
                                 <div class="form-group">
                                     <label>แผนก</label>
                                     <select class="form-control" id="search_department_code"
                                             name="search_department_code">
                                     </select>
                                 </div>
-                            </div>-->
+                            </div
                         </div>
 
                     </div>
-                    <div class="card-footer">
-                        <div class="btn-group">
-                            <button class="btn btn-primary" onclick="getOfficerList(true)" type="button"><i
-                                        class="fa fa-search"></i> ค้นหา
-                            </button>
-                            <button class="btn btn-outline-success" type="button" data-toggle="modal"
-                                    data-target="#addEmployeeModal">
-                                <i class="fa fa-plus"></i> เพิ่ม
-
-                            </button>
-                        </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="getOfficerList(true)" type="button"><i
+                                    class="fa fa-search"></i> ค้นหา
+                        </button>
                     </div>
                 </div>
             </form>
-            <div class="card">
-                <div class="card-header"><strong>รายการพนักงาน</strong></div>
-                <div class="card-body">
-                    <table class="table table-bordered" id="employeeList">
-
-                        <tr>
-
-                        </tr>
-                    </table>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <strong>รายการพนักงาน</strong>
+                    </div>
                 </div>
+
+
+            </div>
+            <div class="card-body">
+                <div align="right">
+                    <button class="btn btn-outline-primary" type="button" onclick="showSearch()">
+                        <i class="fa fa-search"></i> ค้นหาพนักงาน
+                    </button>
+                    <button class="btn btn-outline-success" type="button" data-toggle="modal"
+                            data-target="#addEmployeeModal">
+                        <i class="fa fa-plus"></i> เพิ่มพนักงาน
+                    </button>
+                </div>
+                <table class="table table-bordered" id="employeeList">
+
+                    <tr>
+
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="footer bg-warning text-white">
@@ -289,10 +323,12 @@ include '__navbar_admin.php';
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
             <form name="addEmployeeForm" id="addEmployeeForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addEmployeeLabel"><i class="fa fa-plus"></i> เพิ่มรายชื่อพนักงาน</h5>
+                    <h5 class="modal-title" id="addEmployeeLabel"><i class="fa fa-plus"></i>
+                        <strong>เพิ่มรายชื่อพนักงาน</strong>
+
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">x</span>
                     </button>
@@ -359,22 +395,22 @@ include '__navbar_admin.php';
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <!--<div class="col-6">
                                                 <div class="form-group">
                                                     <label>ตำแหน่ง</label>
                                                     <select class="form-control" id="position_code"
                                                             name="position_code">
                                                     </select>
                                                 </div>
-                                            </div>
-                                            <!--<div class="col-6">
+                                            </div>-->
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
                                                     <select class="form-control" id="department_code"
                                                             name="department_code">
                                                     </select>
                                                 </div>
-                                            </div>-->
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
@@ -424,7 +460,8 @@ include '__navbar_admin.php';
         <div class="modal-content">
             <form name="updateEmployeeForm" id="updateEmployeeForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateEmployeeLabel"><i class="fa fa-edit"></i> แก้ไขรายชื่อพนักงาน</h5>
+                    <h5 class="modal-title" id="updateEmployeeLabel"><i class="fa fa-edit"></i> <strong>แก้ไขรายชื่อพนักงาน</strong>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">x</span>
                     </button>
@@ -494,22 +531,22 @@ include '__navbar_admin.php';
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <!--<div class="col-6">
                                                 <div class="form-group">
                                                     <label>ตำแหน่ง</label>
                                                     <select class="form-control" id="update_position_code"
                                                             name="update_position_code">
                                                     </select>
                                                 </div>
-                                            </div>
-                                           <!-- <div class="col-6">
+                                            </div>-->
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
                                                     <select class="form-control" id="update_department_code"
                                                             name="update_department_code">
                                                     </select>
                                                 </div>
-                                            </div>-->
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
