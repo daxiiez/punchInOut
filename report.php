@@ -8,109 +8,147 @@ include '__checkSession.php';
 <head>
     <?php include '__header.php'; ?>
     <script>
-        let deviceList;
+        let yearList;
+        let employeeList;
+        let departmentList;
+        let currentYear;
+        let monthList = [
+            {
+                monthNo: 1,
+                monthName: "มกราคม"
+            }, {
+                monthNo: 2,
+                monthName: "กุมภาพันธ์"
+            }, {
+                monthNo: 3,
+                monthName: "มีนาคม"
+            }, {
+                monthNo: 4,
+                monthName: "เมษายน"
+            }, {
+                monthNo: 5,
+                monthName: "พฤษภาคม"
+            }, {
+                monthNo: 6,
+                monthName: "มิถุนายน"
+            }, {
+                monthNo: 7,
+                monthName: "กรกฎาคม"
+            }, {
+                monthNo: 8,
+                monthName: "สิงหาคม"
+            }, {
+                monthNo: 9,
+                monthName: "กันยายน"
+            }, {
+                monthNo: 10,
+                monthName: "ตุลาคม"
+            }, {
+                monthNo: 11,
+                monthName: "พฤศจิกายน"
+            }, {
+                monthNo: 12,
+                monthName: "ธันวาคม"
+            }
+        ];
         $(document).ready(() => {
-            /*$("#update_major").mask("99");
-            $("#insert_minor").mask("999999999999");
-            $("#update_major").mask("99");
-            $("#insert_minor").mask("999999999999");*/
-            getDeviceList();
+            setCurrentYearList();
+            setEmployeeList();
+            setDepartmentList();
         });
 
-        function getDeviceList() {
-            $.get("SQL_Select/selectDevice.php", null, (r) => {
-                deviceList = JSON.parse(r);
-
-                let txt = "<table class='table table-bordered '>";
-                txt += "<tr class='bg-info text-white'>";
-                txt += "    <th>#</th>";
-                txt += "    <th>UUID</th>";
-                txt += "    <th>Major</th>";
-                txt += "    <th>Minor</th>";
-                txt += "    <th>ชื่ออุปกรณ์</th>";
-                txt += "    <th>สถานะ</th>";
-                txt += "    <th>แก้ไข</th>";
-                txt += "<tr>";
-                deviceList.forEach((f, i) => {
-                    txt += "<tr>";
-                    txt += "    <td>" + (i + 1) + "</td>";
-                    txt += "    <td>" + f.uuid + "</td>";
-                    txt += "    <td>" + f.major + "</td>";
-                    txt += "    <td>" + f.minor + "</td>";
-                    txt += "    <td>" + f.device_name + "</td>";
-                    txt += "    <td>" + f.status + "</td>";
-                    txt += "    <td>" +
-                        "<div class='btn-group'> " +
-                        "<button onclick='editDetail(" + '"' + f.uuid + '"' + ")' class='btn btn-primary'><i class='fa fa-edit'></i> แก้ไข</button>" +
-                        "<button onclick='deleteDetail(" + '"' + f.uuid + '"' + ")' class='btn btn-outline-danger'><i class='fa fa-trash'></i> ลบ</button>" +
-                        "</div>" +
-                        "</td>";
-                    txt += "<tr>";
+        function setEmployeeList() {
+            $.get("SQL_Select/selectEmployee.php", null, (data) => {
+                employeeList = JSON.parse(data);
+                let txt = "";
+                employeeList.forEach((f) => {
+                    txt += "<option value='" + f.emp_id + "'>" + f.emp_id + " : " + f.emp_name + "</option>"
                 });
-                txt += "</table>";
-                $("#deviceArea").html(txt);
+                $("#employeeCodeList").html(txt);
             });
         }
 
-        function deleteDetail(uuid) {
-            let obj = {
-                uuid : uuid
-            }
-            if (confirm("ต้องการลบอุปกณ์ " + uuid + " หรือไม่ ?")) {
-                $.post("SQL_Delete/deleteDevice.php", obj, (result) => {
-                    if (result == "result" || result == true) {
-                        alert("ลบข้อมูลสำเร็จ!");
-                        getDeviceList()
-                    }
+        function setDepartmentList() {
+            $.get("SQL_Select/selectDepartment.php", null, (data) => {
+                employeeList = JSON.parse(data);
+                let txt = "";
+                employeeList.forEach((f) => {
+                    txt += "<option value='" + f.department_code + "'>" + f.department_code + " : " + f.name + "</option>"
                 });
-            }
-        }
-
-        function validateFrom(obj) {
-            console.log(obj);
-            for (let i in obj) {
-                if (!obj[i]) return false;
-            }
-            return true;
-        }
-
-        function editDetail(uuid) {
-            let em = deviceList.filter(f => f.uuid == uuid)[0];
-            _.mapValues(em, (v, k) => {
-                try {
-                    $("#update_" + k).val(v);
-                } catch (e) {
-                }
+                $("#departmentList").html(txt);
             });
-
-            $('#updateDeviceModal').modal('toggle');
         }
 
-        function insertDevice() {
-            console.log("Insert Device");
-            let deviceObj = arrayToObject($("#addDeviceForm").serializeArray());
-            if (validateFrom(deviceObj)) {
-                $.post("SQL_Insert/insertDevice.php", deviceObj, (result) => {
-                    if (result == "result" || result == true) {
-                        alert("เพิ่มข้อมูลอุปกรณ์สำเร็จ!");
-                        location.reload();
-                    }
+        function setCurrentYearList() {
+            let year = new Date().getFullYear();
+            let txt = "";
+            for (let i = year - 2; i <= year; i++) {
+                txt += "<option value='" + i + "'>" + i + "</option>";
+            }
+            $("#year").html(txt);
+            $("#year").val(year);
+            yearChange();
+        }
+
+        function yearChange() {
+            let selectedYear = $("#year").val();
+            let txt = "";
+            let currentYear = new Date().getFullYear();
+            if (currentYear == selectedYear) {
+                let currentMonth = (new Date().getMonth()) + 1;
+                console.log(currentMonth);
+                let currentMonthList = monthList.filter(f => (f.monthNo <= currentMonth));
+                console.log(currentMonthList);
+                currentMonthList.forEach((f) => {
+                    txt += "<option value='" + f.monthNo + "'>" + f.monthName + "</option>";
                 });
+                $("#month").html(txt);
+                $("#month").val(currentMonth);
             } else {
-                alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+                monthList.forEach((f) => {
+                    txt += "<option value='" + f.monthNo + "'>" + f.monthName + "</option>";
+                });
+                $("#month").html(txt);
+            }
+
+        }
+
+        function genReportDepartment() {
+            let departmentCode = $("#departmentCode").val();
+            let month = $("#month").val();
+            let year = $("#year").val();
+            if(departmentCode){
+                window.open("reportDepartment.php?"
+                    + "department_code=" + departmentCode
+                    + "&month=" + month
+                    + "&year=" + year);
+            }else{
+                alert("กรุณาเลือกรหัสแผนก!");
             }
         }
 
-        function updateDevice() {
-            let updateObj = arrayToObject($("#updateDeviceForm").serializeArray());
-            console.log(updateObj);
-            $.post("SQL_Update/updateDevice.php", updateObj, (result) => {
-                if (result == "result" || result == true) {
-                    alert("แก้ไขข้อมูลอุปกรณ์!");
-                    getDeviceList()
-                }
-            });
+        function genReportEmployee() {
+            let employeeCode = $("#employeeCode").val();
+            let month = $("#month").val();
+            let year = $("#year").val();
+            if(employeeCode){
+                window.open("reportEmployee.php?"
+                    + "employee_code=" + employeeCode
+                    + "&month=" + month
+                    + "&year=" + year);
+            }else{
+                alert("กรุณาเลือกรหัสพนักงาน!");
+            }
         }
+
+        function genReportOverAll() {
+            let month = $("#month").val();
+            let year = $("#year").val();
+            window.open("reportOverAll.php?"
+                + "month=" + month
+                + "&year=" + year);
+        }
+
     </script>
 </head>
 <body>
@@ -126,8 +164,89 @@ include '__navbar_admin.php';
             </nav>
         </div>
         <div class="card-body">
-            <div align="right">
+            <div class="row">
+                <div class="col-3">
+                    <label>ปี</label>
+                    <select class="form-control" id="year">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label>เดือน</label>
+                    <select class="form-control" id="month">
+                        <option></option>
+                    </select>
+                </div>
             </div>
+            <hr>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col"><strong>รายงานตามแผนก</strong></div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="font-weight-bold">เลือกแผนก</label>
+                                    <input placeholder="เลือกแผนก"
+                                           class="form-control"
+                                           list="departmentList"
+                                           id="departmentCode"
+                                           name="departmentCode">
+                                    <datalist id="departmentList">
+                                    </datalist>
+                                </div>
+                                <div class="col-6">
+                                    <div align="right">
+                                        <button class="btn btn-sm btn-primary"
+                                                onclick="genReportDepartment()">
+                                            <i class="fa fa-download"></i> สร้างรายงาน
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col">
+                            <strong>รายงานตามพนักงาน</strong>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="font-weight-bold">เลือกพนักงาน</label>
+                                    <input placeholder="เลือกพนักงาน"
+                                           class="form-control"
+                                           list="employeeCodeList"
+                                           id="employeeCode"
+                                           name="employeeCode">
+                                    <datalist id="employeeCodeList">
+                                    </datalist>
+                                </div>
+                                <div class="col-6">
+                                    <div align="right">
+                                        <button class="btn btn-sm btn-primary" onclick="genReportEmployee()"><i class="fa fa-download"></i> สร้างรายงาน
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col"><strong>รายงานการเข้างานทั้งหมด</strong></div>
+                        <div class="col">
+                            <div align="right">
+                                <button class="btn btn-sm btn-primary" onclick="genReportOverAll()"><i class="fa fa-download"></i> สร้างรายงาน</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="footer bg-warning text-white">
 
