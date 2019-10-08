@@ -13,7 +13,8 @@ $update_emp_salaly = $_POST['update_emp_salaly'];
 /*$update_emp_username ='';
 $update_emp_password ='';
 $update_emp_typeuser ='';*/
-$update_position_code = $_POST['update_position_code'];
+$update_position_code = '';
+$update_department_code = $_POST['update_department_code'];
 
 $sql = "UPDATE punchtime.employee SET  emp_name = '$update_emp_name',
                                         emp_card_id = '$update_emp_card_id', 
@@ -23,7 +24,7 @@ $sql = "UPDATE punchtime.employee SET  emp_name = '$update_emp_name',
                                           emp_pic =  FROM_BASE64('$update_emp_pic'),
                                 emp_start_date = '$update_emp_start_date', 
                                 emp_salaly = '$update_emp_salaly',
-                                  position_code = '$update_position_code' WHERE emp_id = '$update_emp_id'";
+                                  department_code = '$update_department_code' WHERE emp_id = '$update_emp_id'";
 
 $query = mysqli_query($conn, $sql);
 
