@@ -122,14 +122,16 @@ include '__checkSession.php';
         };
 
         function setEmployeeList() {
-            let html = " <tr class='bg-info text-white'>\n" +
+            let html = "<thead>" +
+                " <tr class='bg-info text-white'>\n" +
                 "                            <th>รหัส</th>\n" +
                 "                            <th>ชื่อ</th>\n" +
                 "                            <th>เบอร์โทรศัพท์</th>\n" +
                 // "                            <th>ตำแหน่ง</th>\n" +
                 "                            <th>แผนก</th>\n" +
                 "                            <th>แก้ไข</th>\n" +
-                "                        </tr >";
+                "                        </tr >" +
+                "                        </thead>";
             employeeList.forEach(f => {
                 // let positionName = positionList.filter(x => f.position_code == x.position_code)[0].name;
                 let departmentName = departmentList.filter(x => f.department_code == x.department_code)[0].name;
@@ -147,6 +149,7 @@ include '__checkSession.php';
                     "                                        </tr>";
             });
             $("#employeeList").html(html);
+            $('#employeeList').DataTable();
         };
 
         function viewEmployeeDetail(emp_id) {
@@ -202,6 +205,7 @@ include '__checkSession.php';
         function hideSearch() {
             $("#searchForm").hide();
         }
+
         function showSearch() {
             $("#searchForm").show();
         }
@@ -292,14 +296,15 @@ include '__navbar_admin.php';
             </div>
             <div class="card-body">
                 <div align="right">
-                    <button class="btn btn-outline-primary" type="button" onclick="showSearch()">
+                   <!-- <button class="btn btn-outline-primary" type="button" onclick="showSearch()">
                         <i class="fa fa-search"></i> ค้นหาพนักงาน
-                    </button>
+                    </button>-->
                     <button class="btn btn-outline-success" type="button" data-toggle="modal"
                             data-target="#addEmployeeModal">
                         <i class="fa fa-plus"></i> เพิ่มพนักงาน
                     </button>
                 </div>
+                <hr>
                 <table class="table table-bordered" id="employeeList">
 
                     <tr>

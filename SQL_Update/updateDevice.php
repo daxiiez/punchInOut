@@ -1,6 +1,7 @@
 <?php
 include '../__connect.php';
 $update_uuid = $_POST['update_uuid'];
+$update_uuid_old = $_POST['update_uuid_old'];
 $update_major = $_POST['update_major'];
 $update_minor = $_POST['update_minor'];
 $update_device_name = $_POST['update_device_name'];
@@ -12,7 +13,7 @@ $sql = "UPDATE device set major = '$update_major',
                           status = '$update_status',
                           major = '$update_major'
                          ,uuid = '$update_uuid'
-                    where uuid = '$update_uuid'";
+                    where uuid = '$update_uuid_old'";
 
 $query = mysqli_query($conn, $sql);
 

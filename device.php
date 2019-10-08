@@ -83,6 +83,8 @@ include '__checkSession.php';
                 }
             });
 
+
+            $("#update_uuid_old").val(uuid);
             $('#updateDeviceModal').modal('toggle');
         }
 
@@ -230,6 +232,7 @@ include '__navbar_admin.php';
                                 <div class="form-group">
                                     <label>UUID</label>
                                     <input name="update_uuid" id="update_uuid" class="form-control" maxlength="40">
+                                    <input name="update_uuid_old" id="update_uuid_old" value="12345" type="hidden">
                                 </div>
                             </div>
                             <div class="col-6">
