@@ -5,10 +5,10 @@ $year = $_GET['year'];
 $month = $_GET['month'];
 $date = "01-".$month."-".$year;
 $sql = "select p.*,
-       date_format(p.time_in,'%m-%Y'),
-       date_format(p.time_out,'%m-%Y'),
-       date_format(p.time_in,'%H:%i'),
-       date_format(p.time_out,'%H:%i'),
+       date_format(p.time_in,'%d')as in_date,
+       date_format(p.time_out,'%d') as out_date,
+       date_format(p.time_in,'%H:%i')as in_time,
+       date_format(p.time_out,'%H:%i') as out_time,
        p.time_in,
        e.emp_name,
        e.emp_tel,
