@@ -8,9 +8,9 @@ $emp_gender = $_POST['emp_gender'];
 $emp_pic = $_POST['emp_pic'];
 $emp_start_date = $_POST['emp_start_date'];
 $emp_salaly = $_POST['emp_salaly'];
-$emp_username ='';
-$emp_password ='';
-$emp_typeuser ='';
+$emp_username = '';
+$emp_password = '';
+$emp_typeuser = '';
 $position_code = '';
 $department_code = $_POST['department_code'];
 

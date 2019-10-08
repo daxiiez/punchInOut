@@ -27,7 +27,7 @@ include '__checkSession.php';
             // getPositionList();
             setTimeout(() => {
                 getOfficerList(false);
-            }, 500);
+            }, 1000);
 
             function readURL(input, id) {
                 if (input.files && input.files[0]) {
