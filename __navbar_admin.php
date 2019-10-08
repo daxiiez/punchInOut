@@ -41,10 +41,12 @@
                         echo $_SESSION['emp_username'];
                         ?>
                     </a>
-                   <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="__register.php?viewProfile=1">
-                            <i class="fa fa-user-circle-o"></i> Profile</a>
-                    </div>-->
+                    <!--
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                         <a class="dropdown-item" href="__register.php?viewProfile=1">
+                             <i class="fa fa-user-circle-o"></i> Profile</a>
+                     </div>
+                     -->
                 </li>
 
                 <li class="nav-item">
@@ -63,6 +65,10 @@
             obj[m.name] = m.value
         });
         return obj
+    }
+
+    function dateFormat(date) {
+        return (date.getDate().toString()).padStart(2, 0) + "-" + (date.getMonth() + 1).toString().padStart(2, 0) + "-" + date.getFullYear();
     }
 </script>
 

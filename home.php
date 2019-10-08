@@ -28,8 +28,8 @@ include '__navbar_admin.php';
                 <div class="col">
                     <div align="center">
                         <a href="officer.php">
-                            <div class="img-area" style="width: 400px;">
-                                <img src="img/icon/staff.png" style="width: 400px;" class="image">
+                            <div class="img-area" style="width: 200px;">
+                                <img src="img/icon/staff.png" style="width: 200px;" class="image">
                                 <div class="overlay bg-warning rounded">
                                     <div class="text">จัดการพนักงาน</div>
                                 </div>
@@ -40,8 +40,8 @@ include '__navbar_admin.php';
                 <div class="col">
                     <div align="center">
                         <a href="transaction.php">
-                            <div class="img-area" style="width: 400px;">
-                                <img src="img/icon/time.png" style="width: 400px;" class="image">
+                            <div class="img-area" style="width: 200px;">
+                                <img src="img/icon/time.png" style="width: 200px;" class="image">
                                 <div class="overlay  bg-primary rounded">
                                     <div class="text">เวลาเข้า-ออก</div>
                                 </div>
@@ -52,8 +52,8 @@ include '__navbar_admin.php';
                 <div class="col">
                     <div align="center">
                         <a href="device.php">
-                            <div class="img-area" style="width: 400px;">
-                                <img src="img/icon/beacon.png" style="width: 400px;" class="image">
+                            <div class="img-area" style="width: 200px;">
+                                <img src="img/icon/beacon.png" style="width: 200px;" class="image">
                                 <div class="overlay  bg-success rounded">
                                     <div class="text">อุปกรณ์</div>
                                 </div>
@@ -64,8 +64,8 @@ include '__navbar_admin.php';
                 <div class="col">
                     <div align="center">
                         <a href="department.php">
-                            <div class="img-area" style="width: 400px;">
-                                <img src="img/icon/department.png" style="width: 400px;" class="image">
+                            <div class="img-area" style="width: 200px;">
+                                <img src="img/icon/department.png" style="width: 200px;" class="image">
                                 <div class="overlay  bg-info rounded">
                                     <div class="text">แผนก</div>
                                 </div>
