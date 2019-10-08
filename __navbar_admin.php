@@ -28,6 +28,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="device.php">อุปกรณ์</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="report.php">รายงาน</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
             <?php

@@ -106,7 +106,7 @@ include '__checkSession.php';
             console.log(updateObj);
             $.post("SQL_Update/updateDevice.php", updateObj, (result) => {
                 if (result == "result" || result == true) {
-                    alert("แก้ไขข้อมูลอุปกรณ์!");
+                    alert("แก้ไขข้อมูลอุปกรณ์สำเร็จ!");
                     getDeviceList()
                 }
             });
@@ -211,6 +211,7 @@ include '__navbar_admin.php';
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="updateDeviceModal" role="dialog" aria-labelledby="updateDeviceModal"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -272,6 +273,5 @@ include '__navbar_admin.php';
         </div>
     </div>
 </div>
-
 
 </html>
