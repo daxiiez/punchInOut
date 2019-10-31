@@ -82,11 +82,11 @@ include '__checkSession.php';
         function setDepartmentList() {
             $.get("SQL_Select/selectDepartment.php", null, (data) => {
                 employeeList = JSON.parse(data);
-                let txt = "";
+                let txt = "<option value=''>--เลือกแผนก--</option>";
                 employeeList.forEach((f) => {
                     txt += "<option value='" + f.department_code + "'>" + f.department_code + " : " + f.name + "</option>"
                 });
-                $("#departmentList").html(txt);
+                $("#departmentCode").html(txt);
             });
         }
 
@@ -166,6 +166,7 @@ include '__checkSession.php';
         function gentReport() {
             let startDate = $("#startDate").val();
             let endDate = $("#endDate").val();
+            let statusType = $("#statusType").val();
             if (startDate && endDate) {
                 if (strToDate(endDate) < strToDate(startDate)) {
                     alert("เลือกวันที่ไม่ถูกต้องวันที่เริ่มต้นต้องกว่าวันที่สิ้นสุด!")
@@ -174,7 +175,8 @@ include '__checkSession.php';
                     window.open("reportOverAll.php?"
                         + "startDate=" + strToDate543(startDate)
                         + "&endDate=" + strToDate543(endDate)
-                        + "&departmentCode=" + departmentCode);
+                        + "&departmentCode=" + departmentCode
+                        + "&statusType=" + statusType);
                 }
             } else {
                 alert("กรุณาเลือกวันที่ให้ครบ!")
@@ -207,17 +209,28 @@ include '__navbar_admin.php';
                     <input readonly class="form-control" id="endDate"
                            name="endDate">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label class="font-weight-bold">เลือกแผนก</label>
-                    <input placeholder="เลือกแผนก"
+                    <select  id="departmentCode"
+                             class="form-control"
+                             name="departmentCode">
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label class="font-weight-bold">เลือกประเภทการเข้า-ออกงาน</label>
+                    <select placeholder="เลือกแผนก"
                            class="form-control"
                            list="departmentList"
-                           id="departmentCode"
-                           name="departmentCode">
-                    <datalist id="departmentList">
-                    </datalist>
+                           id="statusType"
+                           name="statusType">
+                        <option value="">--เลือก--</option>
+                        <option value="I">เข้างานปกติ</option>
+                        <option value="L">เข้างานสาย</option>
+                        <option value="O">ออกปกติ</option>
+                        <option value="B">ออกก่อนเวลา</option>
+                    </select>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <div align="left">
                         <button style="margin-top: 30px;"
                                 class="btn btn-primary"

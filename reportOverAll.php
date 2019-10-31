@@ -8,6 +8,7 @@ if (isset($_GET['departmentDode'])) {
 }
 $startDate = $_GET['startDate'];
 $endDate = $_GET['endDate'];
+$statusType = $_GET['statusType'];
 $sql = "SELECT * from department where department_code = '$departmentCode'";
 $result = mysqli_query($conn, $sql);
 $departmentInfo = mysqli_fetch_assoc($result);
@@ -32,6 +33,7 @@ $mpdf = new \Mpdf\Mpdf();
     let departmentCode = "<?php echo $departmentCode?>";
     let startDate = "<?php echo $startDate; ?>";
     let endDate = "<?php echo $endDate; ?>";
+    let statusType = "<?php echo $statusType; ?>";
     let departmentPunchList;
     let punchTimeList;
     let timeOut;
@@ -43,7 +45,8 @@ $mpdf = new \Mpdf\Mpdf();
         let searchParam = {
             departmentCode: departmentCode,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            statusType:statusType
         };
         $.get("SQL_Select/selectDepartmentPunchTime.php",
             searchParam, (result) => {

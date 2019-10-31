@@ -9,7 +9,7 @@ if (isset($_GET['departmentDode'])) {
 
 $startDate = $_GET['startDate'];
 $endDate = $_GET['endDate'];
-
+$statusType = $_GET['statusType'];
 $sql = "select p.*,
        date_format(p.time_in,'%Y-%m-%d')as work_timestamp,
        date_format(p.time_in,'%d')as in_date,
@@ -35,9 +35,19 @@ where 1=1
     or cast(p.time_out as date) between '$startDate' and '$endDate')";
 
 if ($departmentCode != '') {
-    $sql .= " and department_code = '$departmentCode' ";
+    $sql .= " and e.department_code = '$departmentCode' ";
 }
+
+if ($statusType != '') {
+    if ($statusType == 'L' || $statusType == 'O') {
+        $sql .= " and p.status_in = '$statusType' ";
+    } else {
+        $sql .= " and p.status_out = '$statusType' ";
+    }
+}
+
 $sql .= " order by p.time_in , e.department_code asc";
+//echo $sql;
 $query = mysqli_query($conn, $sql);
 $dbdata = array();
 while ($temp = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
