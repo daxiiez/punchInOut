@@ -160,7 +160,7 @@ include '__checkSession.php';
         function strToDate543(str) {
             let txt = str.split("-");
             let length = txt.length;
-            return (Number(txt[length - 1])) + "-" + txt[length - 2] + "-" + txt[length - 3];
+            return (Number(txt[length - 1])-543) + "-" + txt[length - 2] + "-" + txt[length - 3];
         }
 
         function gentReport() {
