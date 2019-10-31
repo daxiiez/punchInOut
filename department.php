@@ -85,7 +85,7 @@ include '__checkSession.php';
             if (validateFrom(departmentObj)) {
                 $.post("SQL_Insert/insertDepartment.php", departmentObj, (result) => {
                     if (result == "result" || result == true) {
-                        alert("เพิ่มข้อมูลอุปกรณ์สำเร็จ!");
+                        alert("เพิ่มข้อมูลสำเร็จ!");
                         location.reload();
                     }
                 });
@@ -99,7 +99,7 @@ include '__checkSession.php';
             console.log(updateObj);
             $.post("SQL_Update/updateDepartment.php", updateObj, (result) => {
                 if (result == "result" || result == true) {
-                    alert("แก้ไขข้อมูลอุปกรณ์!");
+                    alert("แก้ไขข้อมูลสำเร็จ!");
                     getDepartmentList()
                 }
             });
@@ -112,10 +112,11 @@ include '__checkSession.php';
             selectPunchTime(department_code);
             $("#punchTimeSettingModal").modal('toggle');
         }
-
+        let flag = false;
         function selectPunchTime(department_code) {
 
             $.get("SQL_Select/selectPunchTimeDepartment.php", {department_code: department_code}, (r) => {
+
                     r = JSON.parse(r);
                     let html = "";
                     punchTimeList = r.map((m) => {
@@ -123,29 +124,26 @@ include '__checkSession.php';
                         v.effective_date_date = new Date(m.effective_date);
                         return v;
                     });
-
                     effectiveList = punchTimeList.filter(f => (f.effective_date_date <= new Date()));
                     effectiveList = effectiveList[effectiveList.length - 1];
                     if (effectiveList.length != 0) {
-                        html += "<td>" + dateFormat(effectiveList.effective_date_date) + "</td>";
                         html += "<td>" + effectiveList.time_in.substr(0, 2) + ":" + effectiveList.time_in.substr(2, 2) + "</td>"
                         html += "<td>" + effectiveList.time_out.substr(0, 2) + ":" + effectiveList.time_out.substr(2, 2) + "</td>"
                         $("#effectiveTimeList").html(html);
+                        flag = true;
                     } else {
                         $("#effectiveTimeList").html("<td colspan='3' class='text-center'>ยังไม่มีข้อมูล</td>");
                     }
 
-                    futureList = punchTimeList.filter(f => (f.effective_date_date > new Date()));
+                    // futureList = punchTimeList.filter(f => (f.effective_date_date > new Date()));
 
-                    html = "<tr>" +
+                   /* html = "<tr>" +
                         "       <th>#</th>" +
                         "       <th>วันที่มีผล</th>" +
                         "       <th>เวลาเข้า</th>" +
                         "       <th>เวลาออก</th>" +
                         "       <th>แก้ไข</th>" +
-                        "   </tr>";
-
-                    if (futureList.length != 0) {
+                        "   </tr>"; if (futureList.length != 0) {
                         futureList.forEach((f, i) => {
                             html += "<tr>";
                             html += "<td>" + (i + 1) + "</td>";
@@ -162,7 +160,7 @@ include '__checkSession.php';
                         $("#futureTimeList").html(html);
                     } else {
                         $("#futureTimeList").html("<td colspan='4' class='text-center'>ยังไม่มีข้อมูล</td>");
-                    }
+                    }*/
                 }
             );
         }
@@ -182,18 +180,23 @@ include '__checkSession.php';
                 });
             }
         }
-
         function insertPunchTime() {
             if (validatePunchTime()) {
+                let url;
+                if(!flag){
+                    url = "SQL_Insert/insertPunchTime.php";
+                }else{
+
+                    url = "SQL_Update/updateWorkTime.php";
+                }
                 console.log("Insert Department");
                 let punchTimeObj = arrayToObject($("#insertPunchTimeForm").serializeArray());
                 punchTimeObj['insert_department_code'] = selectDepartment;
-                $.post("SQL_Insert/insertPunchTime.php", punchTimeObj, (result) => {
+                $.post(url, punchTimeObj, (result) => {
                     if (result == "result" || result == true) {
                         alert("เพิ่มข้อมูลสำเร็จ!");
                         $("#insert_time_in").val("");
                         $("#insert_time_out").val("");
-                        $("#insert_effective_date").val("");
                         selectPunchTime(selectDepartment);
                     }
                 });
@@ -317,7 +320,7 @@ include '__navbar_admin.php';
         <div class="modal-content">
             <form name="updateDepartmentForm" id="updateDepartmentForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateDepartmentLabel"><i class="fa fa-edit"></i> แก้ไขข้อมูลอุปกรณ์
+                    <h5 class="modal-title" id="updateDepartmentLabel"><i class="fa fa-edit"></i> เพิ่ม/แก้ไขข้อมูลอุปกรณ์
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">x</span>
@@ -370,7 +373,6 @@ include '__navbar_admin.php';
                     <div class="body">
                         <table class="table">
                             <tr>
-                                <th>วันที่มีผล</th>
                                 <th>เวลาเข้า</th>
                                 <th>เวลาออก</th>
                             </tr>
@@ -381,7 +383,7 @@ include '__navbar_admin.php';
                     </div>
                 </div>
                 <br>
-                <div class="card">
+               <!-- <div class="card">
                     <div class="card-header">
                         <strong>กะเวลาล่วงหน้า</strong>
                     </div>
@@ -389,13 +391,13 @@ include '__navbar_admin.php';
                         <table class="table" id="futureTimeList">
                         </table>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="modal-footer">
 
                 <div align="right" style="padding-top: 10px;">
                     <button class="btn btn-outline-info" type="button" data-toggle="modal"
-                            data-target="#addPunchTimeModal"><i class="fa fa-plus"></i> เพิ่มกะเวลา
+                            data-target="#addPunchTimeModal"><i class="fa fa-plus"></i> เพิ่ม/แก้ไขกะเวลา
                     </button>
                 </div>
             </div>
@@ -408,7 +410,7 @@ include '__navbar_admin.php';
     <div class="modal-dialog modal-sm">
         <div class="modal-content bg-success text-white">
             <div class="modal-header">
-                <h3><strong>เพิ่มกะเวลา</strong></h3>
+                <h3><strong>เพิ่ม/แก้ไขกะเวลา</strong></h3>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -424,18 +426,13 @@ include '__navbar_admin.php';
                             <input class="form-control" placeholder="HHMM" id="insert_time_out" maxlength="4"
                                    name="insert_time_out">
                         </div>
-                        <div class="col-12 text-white">
-                            <label>วันที่มีผล</label>
-                            <input readonly class="form-control" id="insert_effective_date"
-                                   name="insert_effective_date">
-                        </div>
                     </form>
                 </div>
                 <small><i>*กรุณากรอกเวลาเข้าด้วยรูปแบบ HHMM<br>HH : 00-23 <br>MM : 00-59</i></small>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-sm btn-dark text-white" onclick="insertPunchTime()"><i class="fa fa-save"></i>
-                    เพิ่มกะเวลา
+                    เพิ่ม/แก้ไขกะเวลา
                 </button>
             </div>
         </div>
