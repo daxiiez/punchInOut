@@ -1,6 +1,7 @@
-# KUHOME
-kuy Ness Yai Kub Pak
-หน้าหลักที่เป็นตัวกลาง ตั้งชื่อเป็น
+# TIME AD
+
+**หน้าหลักที่เป็นตัวกลาง ตั้งชื่อเป็น**
+
 connect.php -> __connect.php
 header.php -> __header.php
 navbar.php -> __navbar.php
