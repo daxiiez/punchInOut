@@ -160,7 +160,7 @@ include '__checkSession.php';
         function strToDate543(str) {
             let txt = str.split("-");
             let length = txt.length;
-            return (Number(txt[length - 1]) + 543) + "-" + txt[length - 2] + "-" + txt[length - 3];
+            return (Number(txt[length - 1])) + "-" + txt[length - 2] + "-" + txt[length - 3];
         }
 
         function gentReport() {
@@ -200,12 +200,12 @@ include '__navbar_admin.php';
         <div class="card-body">
             <div class="row">
                 <div class="col-3">
-                    <label>เริ่มวันที่</label>
+                    <label class="font-weight-bold">เริ่มวันที่</label>
                     <input readonly class="form-control" id="startDate"
                            name="startDate">
                 </div>
                 <div class="col-3">
-                    <label>ถึงวันที่</label>
+                    <label class="font-weight-bold">ถึงวันที่</label>
                     <input readonly class="form-control" id="endDate"
                            name="endDate">
                 </div>
