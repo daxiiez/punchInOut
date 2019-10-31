@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 
 $db_host = "localhost";
     $db_username = "root";
-    $db_password = "";
+    $db_password = "12345678";
     $db_name = "punchtime";
     $conn = @mysqli_connect("$db_host", "$db_username", "$db_password", "$db_name");
     if (!$conn) {
