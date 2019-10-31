@@ -1,30 +1,46 @@
 <?php
 include '../__connect.php';
-$department_code = $_GET['department_code'];
-$year = $_GET['year'];
-$month = $_GET['month'];
-$date = "01-".$month."-".$year;
+
+$departmentCode = '';
+if (isset($_GET['departmentDode'])) {
+
+    $departmentCode = $_GET['departmentDode'];
+}
+
+$startDate = $_GET['startDate'];
+$endDate = $_GET['endDate'];
+
 $sql = "select p.*,
+       date_format(p.time_in,'%Y-%m-%d')as work_timestamp,
        date_format(p.time_in,'%d')as in_date,
+       date_format(p.time_in,'%d-%m-%Y')as work_date,
+       date_format(p.time_out,'%d-%m-%Y')as work_out_date,
        date_format(p.time_out,'%d') as out_date,
        date_format(p.time_in,'%H:%i')as in_time,
        date_format(p.time_out,'%H:%i') as out_time,
        p.time_in,
        e.emp_name,
        e.emp_tel,
+       e.emp_tel,
+       d.name as department_name,
        sIn.name  as status_in_name,
        sOut.name as status_out_name
 from punchtime p
          inner join employee e on p.emp_id = e.emp_id
+         inner join department d on d.department_code = e.department_code
          left join status_code sIn on sIn.status = p.status_in
          left join status_code sOut on sOut.status = p.status_out
-where e.department_code = 'A'
-and (date_format(p.time_in,'%m-%Y') = date_format(str_to_date('$date','%d-%m-%Y'),'%m-%Y')
-or date_format(p.time_out,'%m-%Y') = date_format(str_to_date('$date','%d-%m-%Y'),'%m-%Y'))";
+where 1=1
+  and (cast(p.time_in as date) between '$startDate' and '$endDate'
+    or cast(p.time_out as date) between '$startDate' and '$endDate')";
 
-$query = mysqli_query($conn,$sql);
+if ($departmentCode != '') {
+    $sql .= " and department_code = '$departmentCode' ";
+}
+$sql .= " order by p.time_in , e.department_code asc";
+$query = mysqli_query($conn, $sql);
 $dbdata = array();
-while ( $temp = mysqli_fetch_array($query,MYSQLI_ASSOC))  {
-    $dbdata[]=$temp;
+while ($temp = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+    $dbdata[] = $temp;
 }
 echo json_encode($dbdata);

@@ -52,10 +52,21 @@ include '__checkSession.php';
             }
         ];
         $(document).ready(() => {
-            setCurrentYearList();
             setEmployeeList();
             setDepartmentList();
+            setDatePicker();
         });
+
+        function setDatePicker() {
+            $('#startDate').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'dd-mm-yyyy'
+            });
+            $('#endDate').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'dd-mm-yyyy'
+            });
+        };
 
         function setEmployeeList() {
             $.get("SQL_Select/selectEmployee.php", null, (data) => {
@@ -110,19 +121,18 @@ include '__checkSession.php';
                 });
                 $("#month").html(txt);
             }
-
         }
 
         function genReportDepartment() {
             let departmentCode = $("#departmentCode").val();
             let month = $("#month").val();
             let year = $("#year").val();
-            if(departmentCode){
+            if (departmentCode) {
                 window.open("reportDepartment.php?"
                     + "department_code=" + departmentCode
                     + "&month=" + month
                     + "&year=" + year);
-            }else{
+            } else {
                 alert("กรุณาเลือกรหัสแผนก!");
             }
         }
@@ -131,22 +141,44 @@ include '__checkSession.php';
             let employeeCode = $("#employeeCode").val();
             let month = $("#month").val();
             let year = $("#year").val();
-            if(employeeCode){
+            if (employeeCode) {
                 window.open("reportEmployee.php?"
                     + "employee_code=" + employeeCode
                     + "&month=" + month
                     + "&year=" + year);
-            }else{
+            } else {
                 alert("กรุณาเลือกรหัสพนักงาน!");
             }
         }
 
-        function genReportOverAll() {
-            let month = $("#month").val();
-            let year = $("#year").val();
-            window.open("reportOverAll.php?"
-                + "month=" + month
-                + "&year=" + year);
+        function strToDate(str) {
+            let txt = str.split("-");
+            let length = txt.length;
+            return new Date(txt[length - 1] + "-" + txt[length - 2] + "-" + txt[length - 3])
+        }
+
+        function strToDate543(str) {
+            let txt = str.split("-");
+            let length = txt.length;
+            return (Number(txt[length - 1]) + 543) + "-" + txt[length - 2] + "-" + txt[length - 3];
+        }
+
+        function gentReport() {
+            let startDate = $("#startDate").val();
+            let endDate = $("#endDate").val();
+            if (startDate && endDate) {
+                if (strToDate(endDate) < strToDate(startDate)) {
+                    alert("เลือกวันที่ไม่ถูกต้องวันที่เริ่มต้นต้องกว่าวันที่สิ้นสุด!")
+                } else {
+                    let departmentCode = $("#departmentCode").val();
+                    window.open("reportOverAll.php?"
+                        + "startDate=" + strToDate543(startDate)
+                        + "&endDate=" + strToDate543(endDate)
+                        + "&departmentCode=" + departmentCode);
+                }
+            } else {
+                alert("กรุณาเลือกวันที่ให้ครบ!")
+            }
         }
 
     </script>
@@ -166,93 +198,41 @@ include '__navbar_admin.php';
         <div class="card-body">
             <div class="row">
                 <div class="col-3">
-                    <label>ปี</label>
-                    <select class="form-control" id="year">
-                        <option></option>
-                    </select>
+                    <label>เริ่มวันที่</label>
+                    <input readonly class="form-control" id="startDate"
+                           name="startDate">
                 </div>
                 <div class="col-3">
-                    <label>เดือน</label>
-                    <select class="form-control" id="month">
-                        <option></option>
-                    </select>
+                    <label>ถึงวันที่</label>
+                    <input readonly class="form-control" id="endDate"
+                           name="endDate">
                 </div>
+                <div class="col-3">
+                    <label class="font-weight-bold">เลือกแผนก</label>
+                    <input placeholder="เลือกแผนก"
+                           class="form-control"
+                           list="departmentList"
+                           id="departmentCode"
+                           name="departmentCode">
+                    <datalist id="departmentList">
+                    </datalist>
+                </div>
+                <div class="col-3">
+                    <div align="left">
+                        <button style="margin-top: 30px;"
+                                class="btn btn-primary"
+                                onclick="gentReport()">
+                            <i class="fa fa-download"></i> สร้างรายงาน
+                        </button>
+                    </div>
+                </div>
+                <hr>
             </div>
-            <hr>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col"><strong>รายงานตามแผนก</strong></div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label class="font-weight-bold">เลือกแผนก</label>
-                                    <input placeholder="เลือกแผนก"
-                                           class="form-control"
-                                           list="departmentList"
-                                           id="departmentCode"
-                                           name="departmentCode">
-                                    <datalist id="departmentList">
-                                    </datalist>
-                                </div>
-                                <div class="col-6">
-                                    <div align="right">
-                                        <button class="btn btn-sm btn-primary"
-                                                onclick="genReportDepartment()">
-                                            <i class="fa fa-download"></i> สร้างรายงาน
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+            <div class="footer bg-warning text-white">
 
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col">
-                            <strong>รายงานตามพนักงาน</strong>
-                        </div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label class="font-weight-bold">เลือกพนักงาน</label>
-                                    <input placeholder="เลือกพนักงาน"
-                                           class="form-control"
-                                           list="employeeCodeList"
-                                           id="employeeCode"
-                                           name="employeeCode">
-                                    <datalist id="employeeCodeList">
-                                    </datalist>
-                                </div>
-                                <div class="col-6">
-                                    <div align="right">
-                                        <button class="btn btn-sm btn-primary" onclick="genReportEmployee()"><i class="fa fa-download"></i> สร้างรายงาน
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col"><strong>รายงานการเข้างานทั้งหมด</strong></div>
-                        <div class="col">
-                            <div align="right">
-                                <button class="btn btn-sm btn-primary" onclick="genReportOverAll()"><i class="fa fa-download"></i> สร้างรายงาน</button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="footer bg-warning text-white">
-
+            </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>
