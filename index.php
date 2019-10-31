@@ -10,7 +10,12 @@ if (isset($_POST['emp_username'])) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     if ($row) {
+        if($row['emp_typeuser']!='1'){
+            header("Location: noAuth.php");
+            session_destroy();
+        }
         $username = $row['emp_username'];
+        $_SESSION['emp_typeuser']  = 'Y';
         $_SESSION['emp_username'] = $row['emp_username'];
         echo "<script> alert('เข้าสู่ระบบสำเร็จ'); window.location='home.php'; </script>";
     } else {

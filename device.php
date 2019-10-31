@@ -193,8 +193,8 @@ include '__navbar_admin.php';
                                     <div class="form-group">
                                         <label>สถานะ</label>
                                         <select name="insert_status" id="insert_status" class="form-control">
-                                            <option value="A">Active</option>
-                                            <option value="C">Cancel</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Cancel</option>
                                         </select>
                                     </div>
                                 </div>
@@ -257,8 +257,8 @@ include '__navbar_admin.php';
                                 <div class="form-group">
                                     <label>สถานะ</label>
                                     <select name="update_status" id="update_status" class="form-control">
-                                        <option value="A">Active</option>
-                                        <option value="C">Cancel</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Cancel</option>
                                     </select>
                                 </div>
                             </div>

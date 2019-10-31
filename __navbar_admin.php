@@ -14,23 +14,30 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div id="navbarNavDropdown" class="navbar-collapse collapse">
-        <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item">
-                <a class="nav-link" href="transaction.php">รายการเข้า-ออก</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="officer.php">พนักงาน</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="department.php">แผนก</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="device.php">อุปกรณ์</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="report.php">รายงาน</a>
-            </li>
+        <ul class="navbar-nav mr-auto">
+            <?php
+            if (isset($_SESSION['emp_typeuser'])) {
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="transaction.php">รายการเข้า-ออก</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="officer.php">พนักงาน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="department.php">แผนก</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="device.php">อุปกรณ์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="report.php">รายงาน</a>
+                </li>
+                <?php
+            }
+            ?>
+
         </ul>
         <ul class="navbar-nav">
             <?php

@@ -127,7 +127,7 @@ include '__checkSession.php';
                 "                            <th>รหัส</th>\n" +
                 "                            <th>ชื่อ</th>\n" +
                 "                            <th>เบอร์โทรศัพท์</th>\n" +
-                // "                            <th>ตำแหน่ง</th>\n" +
+                "                            <th>สิทธิ์การใช้งาน</th>\n" +
                 "                            <th>แผนก</th>\n" +
                 "                            <th>แก้ไข</th>\n" +
                 "                        </tr >" +
@@ -135,11 +135,17 @@ include '__checkSession.php';
             employeeList.forEach(f => {
                 // let positionName = positionList.filter(x => f.position_code == x.position_code)[0].name;
                 let departmentName = departmentList.filter(x => f.department_code == x.department_code)[0].name;
+                let statusLabel ='';
+                if(f.emp_typeuser=='1'){
+                    statusLabel = "<p class='text-center text-success'><i class='fa fa-check'></i></p>"
+                }else{
+                    statusLabel = "<p class='text-center text-danger'><i class='fa fa-times'></i></p>"
+                }
                 html += " <tr> " +
                     "                                            <td>" + f.emp_id + "</td>" +
                     "                                            <td>" + f.emp_name + "</td>" +
                     "                                            <td>" + f.emp_tel + "</td>" +
-                    // "                                            <td>" + positionName + "</td>" +
+                    "                                            <td>" + statusLabel + "</td>" +
                     "                                            <td>" + departmentName + "</td>" +
                     "                                            <td>" +
                     "                                    <button type='button' onclick='viewEmployeeDetail(" + f.emp_id + ")' class='btn-block btn btn-outline-info'>" +
@@ -167,7 +173,15 @@ include '__checkSession.php';
                 } catch (e) {
                 }
             });
+            console.log(em)
+            let checked = em.emp_typeuser == '1' ? true : false;
+            $("#update_emp_typeuser").prop('checked', checked);
 
+            if(checked) {
+                $("#update_emp_typeuser").attr("disabled", true);
+            }else{
+                $("#update_emp_typeuser").removeAttr("disabled");
+            }
             $('#updateEmployeeModal').modal('toggle');
         }
 
@@ -190,9 +204,13 @@ include '__checkSession.php';
         }
 
         function updateEmployee() {
+
+            let userType =  $("#update_emp_typeuser")[0].checked ? '1' : '0';
+            console.log(userType);
             let updateObj = arrayToObject($("#updateEmployeeForm").serializeArray());
             updateObj["update_emp_pic"] = imgUploadFile;
             updateObj["update_emp_id"] = updateEmpId;
+            updateObj["update_emp_typeuser"] = userType;
             console.log(updateObj);
             $.post("SQL_Update/updateEmployee.php", updateObj, (result) => {
                 if (result == "result" || result == true) {
@@ -347,6 +365,14 @@ include '__navbar_admin.php';
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input name="emp_username" id="emp_username" class="form-control" maxlength="20" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label>ชื่อ-สกุล</label>
                                                     <input name="emp_name" id="emp_name" class="form-control" required>
                                                 </div>
@@ -480,6 +506,15 @@ include '__navbar_admin.php';
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input name="update_emp_username" id="update_emp_username"
+                                                           class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label>ชื่อ-สกุล</label>
                                                     <input name="update_emp_name" id="update_emp_name"
                                                            class="form-control" required>
@@ -536,14 +571,7 @@ include '__navbar_admin.php';
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <!--<div class="col-6">
-                                                <div class="form-group">
-                                                    <label>ตำแหน่ง</label>
-                                                    <select class="form-control" id="update_position_code"
-                                                            name="update_position_code">
-                                                    </select>
-                                                </div>
-                                            </div>-->
+
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
@@ -552,6 +580,14 @@ include '__navbar_admin.php';
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-6">
+                                               <div class="form-group">
+                                                   <label>ตำแหน่ง</label>
+                                                   <div class="checkbox">
+                                                       <label><input type="checkbox"  id="update_emp_typeuser"   name="update_emp_typeuser" value=""> สถานะ Admin</label>
+                                                   </div>
+                                               </div>
+                                           </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">

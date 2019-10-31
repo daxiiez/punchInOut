@@ -13,13 +13,14 @@ $update_emp_salaly = $_POST['update_emp_salaly'];
 /*$update_emp_username ='';
 $update_emp_password ='';
 $update_emp_typeuser ='';*/
-$update_position_code = '';
+$update_emp_typeuser = $_POST['update_emp_typeuser'];
 $update_department_code = $_POST['update_department_code'];
 
 $sql = "UPDATE punchtime.employee SET  emp_name = '$update_emp_name',
                                         emp_card_id = '$update_emp_card_id', 
                                         emp_address = '$update_emp_address',
                                          emp_tel = '$update_emp_tel',
+                                         emp_typeuser = '$update_emp_typeuser',
                                           emp_gender = '$update_emp_gender', 
                                           emp_pic =  FROM_BASE64('$update_emp_pic'),
                                 emp_start_date = '$update_emp_start_date', 
