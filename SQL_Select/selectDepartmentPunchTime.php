@@ -31,8 +31,10 @@ from punchtime p
          left join status_code sIn on sIn.status = p.status_in
          left join status_code sOut on sOut.status = p.status_out
 where 1=1
-  and (cast(p.time_in as date) between '$startDate' and '$endDate'
-    or cast(p.time_out as date) between '$startDate' and '$endDate')";
+  and (date(p.time_in) between '$startDate' and '$endDate'
+    or date(p.time_out) between '$startDate' and '$endDate')";
+//  and (cast(p.time_in as date) between '$startDate' and '$endDate'
+//    or cast(p.time_out as date) between '$startDate' and '$endDate')";
 
 if ($departmentCode != '') {
     $sql .= " and e.department_code = '$departmentCode' ";
