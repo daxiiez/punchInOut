@@ -2,9 +2,9 @@
 include '../__connect.php';
 
 $departmentCode = '';
-if (isset($_GET['departmentDode'])) {
+if (isset($_GET['departmentCode'])) {
 
-    $departmentCode = $_GET['departmentDode'];
+    $departmentCode = $_GET['departmentCode'];
 }
 
 $startDate = $_GET['startDate'];

@@ -2,12 +2,13 @@
 include '__connect.php';
 include '__checkSession.php';
 $departmentCode = '';
-if (isset($_GET['departmentDode'])) {
-
-    $departmentCode = $_GET['departmentDode'];
+if (isset($_GET['departmentCode'])) {
+    $departmentCode = $_GET['departmentCode'];
 }
 $startDate = $_GET['startDate'];
+$startDateDisplay = $_GET['startDateDisplay'];
 $endDate = $_GET['endDate'];
+$endDateDisplay = $_GET['endDateDisplay'];
 $statusType = $_GET['statusType'];
 $sql = "SELECT * from department where department_code = '$departmentCode'";
 $result = mysqli_query($conn, $sql);
@@ -46,7 +47,7 @@ $mpdf = new \Mpdf\Mpdf();
             departmentCode: departmentCode,
             startDate: startDate,
             endDate: endDate,
-            statusType:statusType
+            statusType: statusType
         };
         $.get("SQL_Select/selectDepartmentPunchTime.php",
             searchParam, (result) => {
@@ -117,7 +118,7 @@ $mpdf = new \Mpdf\Mpdf();
 <div class="container-fluid" style="margin-top: 30px;">
     <div align="center">
         <h3><strong>รายงานการเข้าออกงาน</strong></h3>
-        <h4><strong>ประจำวันที่ <?php echo $startDate; ?> ถึง <?php echo $endDate; ?></strong></h4>
+        <h4><strong>ประจำวันที่ <?php echo $startDateDisplay; ?> ถึง <?php echo $endDateDisplay; ?></strong></h4>
     </div>
     <div id="reportArea">
     </div>

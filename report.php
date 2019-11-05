@@ -173,7 +173,9 @@ include '__checkSession.php';
                 } else {
                     let departmentCode = $("#departmentCode").val();
                     window.open("reportOverAll.php?"
-                        + "startDate=" + strToDate543(startDate)
+                        + "startDateDisplay=" + (startDate)
+                        + "&endDateDisplay=" + (endDate)
+                        + "&startDate=" + strToDate543(startDate)
                         + "&endDate=" + strToDate543(endDate)
                         + "&departmentCode=" + departmentCode
                         + "&statusType=" + statusType);
