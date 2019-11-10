@@ -8,7 +8,55 @@ include '__checkSession.php';
 <head>
     <?php include '__header.php'; ?>
     <script>
+        let monthList = [
+            {
+                monthNo: 1,
+                monthName: "มกราคม"
+            }, {
+                monthNo: 2,
+                monthName: "กุมภาพันธ์"
+            }, {
+                monthNo: 3,
+                monthName: "มีนาคม"
+            }, {
+                monthNo: 4,
+                monthName: "เมษายน"
+            }, {
+                monthNo: 5,
+                monthName: "พฤษภาคม"
+            }, {
+                monthNo: 6,
+                monthName: "มิถุนายน"
+            }, {
+                monthNo: 7,
+                monthName: "กรกฎาคม"
+            }, {
+                monthNo: 8,
+                monthName: "สิงหาคม"
+            }, {
+                monthNo: 9,
+                monthName: "กันยายน"
+            }, {
+                monthNo: 10,
+                monthName: "ตุลาคม"
+            }, {
+                monthNo: 11,
+                monthName: "พฤศจิกายน"
+            }, {
+                monthNo: 12,
+                monthName: "ธันวาคม"
+            }
+        ];
 
+        $(document).ready(()=>{
+            let currentDate = {
+                date : new Date().getDate(),
+                month : monthList[new Date().getMonth()],
+                year : new Date().getFullYear()
+            }
+            console.log(currentDate);
+            $("#alert").html("ระบบจัดการการเข้าออกของพนักงาน วันที่ "+currentDate.date+" "+currentDate.month.monthName+" "+currentDate.year);
+        })
     </script>
 </head>
 <body>
@@ -20,7 +68,7 @@ include '__navbar_admin.php';
     <div class="card">
         <div class="card-header">
             <nav aria-label="breadcrumb  bg-dark">
-                <marquee>Test</marquee>
+                <marquee id="alert"></marquee>
             </nav>
         </div>
         <div class="card-body">
