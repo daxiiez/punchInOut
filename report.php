@@ -172,7 +172,7 @@ include '__checkSession.php';
                     alert("เลือกวันที่ไม่ถูกต้องวันที่เริ่มต้นต้องกว่าวันที่สิ้นสุด!")
                 } else {
                     let departmentCode = $("#departmentCode").val();
-                    window.open("reportOverAll.php?"
+                    window.open("reportEmployee.php?"
                         + "startDateDisplay=" + (startDate)
                         + "&endDateDisplay=" + (endDate)
                         + "&startDate=" + strToDate543(startDate)

@@ -17,7 +17,7 @@ if (isset($_POST['emp_username'])) {
         $username = $row['emp_username'];
         $_SESSION['emp_typeuser']  = 'Y';
         $_SESSION['emp_username'] = $row['emp_username'];
-        echo "<script> alert('เข้าสู่ระบบสำเร็จ'); window.location='home.php'; </script>";
+        echo "<script>  window.location='home.php'; </script>";
     } else {
         $msg = "<span class='text-danger'><i class='fa fa-times'></i> เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบ username/password อีกครั้ง</span>";
     }
