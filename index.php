@@ -45,16 +45,16 @@ if (isset($_POST['emp_username'])) {
         z-index: -1;
 
         display: block;
-        background-image: url('img/cityview.jpg');
+        background-image: url('img/img1.jpg');
         background-size:cover;
         width: 100%;
         height: 100%;
 
-        -webkit-filter: blur(5px);
-        -moz-filter: blur(5px);
-        -o-filter: blur(5px);
-        -ms-filter: blur(5px);
-        filter: blur(5px);
+        -webkit-filter: blur(2px);
+        -moz-filter: blur(2px);
+        -o-filter: blur(2px);
+        -ms-filter: blur(2px);
+        filter: blur(2px);
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
