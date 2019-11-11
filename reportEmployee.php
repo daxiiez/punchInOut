@@ -42,7 +42,7 @@ $mpdf = new \Mpdf\Mpdf([
         ],
     'default_font' => 'thsarabun'
 ]);
-$reportName = "รายงานการเข้าออกงานประจำวันที่ $startDateDisplay ถึง $endDateDisplay".".pdf";
+$reportName = "รายงานการเข้าออกงานประจำวันที่ $startDateDisplay ถึง $endDateDisplay" . ".pdf";
 $html = "
             <style>
                 .center {
@@ -106,12 +106,29 @@ $html .= "
         <th>เวลาออก</th>
         <th>สถานะออก</th>
     </tr>";
-$sql = "select count(*) as total,date_format(p.time_in,'%d-%m-%Y') as work_date,date_format(p.time_in,'%Y-%m-%d') as work_date_ff from punchtime p where (cast(p.time_in as date) between '$startDate' and '$endDate'
-    or cast(p.time_out as date) between '$startDate' and '$endDate') group by date_format(p.time_in,'%d-%m-%Y'),date_format(p.time_in,'%Y-%m-%d') order by p.time_in;";
+$sql = "select count(*) as total,
+date_format(p.time_in,'%d-%m-%Y') as work_date,
+date_format(p.time_in,'%Y-%m-%d') as work_date_ff 
+from punchtime p 
+inner join employee e on p.emp_id = e.emp_id
+where (cast(p.time_in as date) between '$startDate' and '$endDate'
+    or cast(p.time_out as date) between '$startDate' and '$endDate') ";
+if ($departmentCode != '') {
+    $sql .= " and e.department_code = '$departmentCode' ";
+}
+
+if ($statusType != '') {
+    if ($statusType == 'L' || $statusType == 'O') {
+        $sql .= " and p.status_in = '$statusType' ";
+    } else {
+        $sql .= " and p.status_out = '$statusType' ";
+    }
+}
+$sql .= " group by date_format(p.time_in,'%d-%m-%Y'),date_format(p.time_in,'%Y-%m-%d') order by p.time_in;";
 $query = mysqli_query($conn, $sql);
 
 while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-    $html .= "<tr><td rowspan='".($row['total']+1)."'>".$row['work_date']."</td></tr>";
+    $html .= "<tr><td rowspan='" . ($row['total'] + 1) . "'>" . $row['work_date'] . "</td></tr>";
     $workDate = $row['work_date_ff'];
     $sql = "select p.*,
        date_format(p.time_in,'%Y-%m-%d')as work_timestamp,
@@ -133,17 +150,28 @@ from punchtime p
          inner join department d on d.department_code = e.department_code
          left join status_code sIn on sIn.status = p.status_in
          left join status_code sOut on sOut.status = p.status_out
-where 1=1
-  and cast(p.time_in as date) = '$workDate'";
+where 1=1 ";
+    if ($departmentCode != '') {
+        $sql .= " and e.department_code = '$departmentCode' ";
+    }
+
+    if ($statusType != '') {
+        if ($statusType == 'L' || $statusType == 'O') {
+            $sql .= " and p.status_in = '$statusType' ";
+        } else {
+            $sql .= " and p.status_out = '$statusType' ";
+        }
+    }
+    $sql .= "  and cast(p.time_in as date) = '$workDate'";
     $resultRow = mysqli_query($conn, $sql);
     while ($temp = mysqli_fetch_array($resultRow, MYSQLI_ASSOC)) {
         $html .= "<tr>";
-        $html .= "<td>".$temp['emp_id']." : ".$temp['emp_name']."</td>";
-        $html .= "<td>".$temp['department_name']."</td>";
-        $html .= "<td>".$temp['in_time']."</td>";
-        $html .= "<td>".$temp['status_in_name']."</td>";
-        $html .= "<td>".$temp['out_time']."</td>";
-        $html .= "<td>".$temp['status_out_name']."</td>";
+        $html .= "<td>" . $temp['emp_id'] . " : " . $temp['emp_name'] . "</td>";
+        $html .= "<td>" . $temp['department_name'] . "</td>";
+        $html .= "<td>" . $temp['in_time'] . "</td>";
+        $html .= "<td>" . $temp['status_in_name'] . "</td>";
+        $html .= "<td>" . $temp['out_time'] . "</td>";
+        $html .= "<td>" . $temp['status_out_name'] . "</td>";
         $html .= "</tr>";
     }
 
@@ -151,4 +179,4 @@ where 1=1
 $html .= "</table>";
 //echo $html;
 $mpdf->WriteHTML($html);
-$mpdf->Output($reportName,'I');
+$mpdf->Output($reportName, 'I');
