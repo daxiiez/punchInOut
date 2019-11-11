@@ -20,6 +20,28 @@
 </script>
 <style>
 
+    @font-face {
+        font-family: applyFont2;
+        src: url('fonts/Serithai-Regular.ttf');
+    }
+    .logo {
+        color: white;
+        font: bold 52px Helvetica, Arial, Sans-Serif;
+        text-shadow: 1px 1px #000000,
+        2px 2px #000000,
+        3px 3px #fe4902;
+    }
+    .logo:hover {
+        position: relative;
+        top: -3px;
+        left: -3px;
+        text-shadow: 1px 1px #fe4902,
+        2px 2px #000000,
+        3px 3px #000000,
+        4px 4px #000000,
+        5px 5px #000000,
+        6px 6px #000000;
+    }
      .img-area {
          position: relative;
      }

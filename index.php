@@ -30,6 +30,13 @@ if (isset($_POST['emp_username'])) {
 <!Document>
 <html>
 <style>
+    /*@font-face {*/
+    /*    font-family: headers;font-family: headers;*/
+    /*    src: url("font/Serithai-Regular.ttf");*/
+    /*}*/
+
+
+
     .content:before {
         content: "";
         position: fixed;
@@ -53,21 +60,7 @@ if (isset($_POST['emp_username'])) {
         -o-background-size: cover;
         background-size: cover;
     }
-    /*.bg {*/
-    /*    */
-    /*    !**!*/
-    /*    background: url('img/cityview.jpg');*/
 
-    /*    -webkit-filter: blur(5px);*/
-    /*    -moz-filter: blur(5px);*/
-    /*    -o-filter: blur(5px);*/
-    /*    -ms-filter: blur(5px);*/
-    /*    filter: blur(5px);*/
-    /*    -webkit-background-size: cover;
-    /*    -moz-background-size: cover;
-    /*    -o-background-size: cover;
-    /*    background-size: cover;
-    /*}*/
 </style>
 <head>
     <?php include '__header.php'; ?>
@@ -78,13 +71,18 @@ if (isset($_POST['emp_username'])) {
 <?php
 //include '__navbar_admin.php';
 ?>
+<style>
+    *{
+        font-family: applyFont2;
+    }
 
+</style>
 <div class="container" style=" ">
     <div class="container">
         <div align="center">
             <br>
             <br>
-            <h3 class="font-weight-bold">Time Adjust System</h3>
+            <h1 class="font-weight-bold logo">Time Adjust System</h1>
             <img src="img/push_back_time.png" style="width: 20%">
 
         </div>

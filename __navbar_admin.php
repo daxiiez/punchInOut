@@ -1,10 +1,12 @@
 <style>
     .bg-rose {
-        background-image: url("img/bg.jpg");
+        background-image: url("img/underbg.jpg");
     }
 </style>
-<div class="jumbotron text-center bg-rose" style="margin-bottom:0; ">
-    <h1 style="padding-bottom: 300px;"></h1>
+<div class=" bg-rose" style="margin-bottom:0; ">
+    <br>
+    <br>
+    <h1 style="padding-bottom: 100px; margin-left: 15px;" class="logo">Time Adjust System</h1>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
