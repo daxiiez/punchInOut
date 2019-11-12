@@ -3,12 +3,6 @@
         background-image: url("img/img2.jpg");
     }
 </style>
-<div class=" bg-rose" style="margin-bottom:0; ">
-    <br>
-    <br>
-    <h3 style="padding-bottom: 70px; margin-left: 15px;" class="logo">Time Adjust System</h3>
-
-</div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <a class="navbar-brand" href="index.php">Time AD</a>
