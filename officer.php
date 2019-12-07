@@ -377,7 +377,14 @@ include '__navbar_admin.php';
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input name="emp_username" id="emp_username" class="form-control" maxlength="20" required>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
