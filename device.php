@@ -161,7 +161,7 @@ include '__navbar_admin.php';
 
             <form name="addDeviceForm" id="addDeviceForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addDeviceLabel"><i class="fa fa-plus"></i> เพิ่มรายชื่อพนักงาน</h5>
+                    <h5 class="modal-title" id="addDeviceLabel"><i class="fa fa-plus"></i> เพิ่มอุปกรณ์</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">x</span>
                     </button>
