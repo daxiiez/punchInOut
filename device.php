@@ -25,20 +25,26 @@ include '__checkSession.php';
                 txt += "<tr class='bg-info text-white'>";
                 txt += "    <th>#</th>";
                 txt += "    <th>UUID</th>";
-                txt += "    <th>Major</th>";
-                txt += "    <th>Minor</th>";
+/*                txt += "    <th>Major</th>";
+                txt += "    <th>Minor</th>";*/
                 txt += "    <th>ชื่ออุปกรณ์</th>";
                 txt += "    <th>สถานะ</th>";
                 txt += "    <th>แก้ไข</th>";
                 txt += "<tr>";
                 deviceList.forEach((f, i) => {
+                    let status  = "";
+                    if(f.status==1){
+                        status = "Active";
+                    }else{
+                        status = "Cancel";
+                    }
                     txt += "<tr>";
                     txt += "    <td>" + (i + 1) + "</td>";
                     txt += "    <td>" + f.uuid + "</td>";
-                    txt += "    <td>" + f.major + "</td>";
-                    txt += "    <td>" + f.minor + "</td>";
+/*                    txt += "    <td>" + f.major + "</td>";
+                    txt += "    <td>" + f.minor + "</td>";*/
                     txt += "    <td>" + f.device_name + "</td>";
-                    txt += "    <td>" + f.status + "</td>";
+                    txt += "    <td>" + status + "</td>";
                     txt += "    <td>" +
                         "<div class='btn-group'> " +
                         "<button onclick='editDetail(" + '"' + f.uuid + '"' + ")' class='btn btn-primary'><i class='fa fa-edit'></i> แก้ไข</button>" +
@@ -171,7 +177,7 @@ include '__navbar_admin.php';
                                         <input name="insert_uuid" id="insert_uuid" class="form-control" maxlength="40">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                               <!-- <div class="col-6">
                                     <div class="form-group">
                                         <label>Major</label>
                                         <input name="insert_major" id="insert_major" class="form-control" maxlength="2">
@@ -182,7 +188,7 @@ include '__navbar_admin.php';
                                         <label>Minor</label>
                                         <input name="insert_minor" id="insert_minor" class="form-control" maxlength="12">
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>ชื่ออุปกรณ์</label>
@@ -235,7 +241,7 @@ include '__navbar_admin.php';
                                     <input name="update_uuid_old" id="update_uuid_old" value="12345" type="hidden">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <!--<div class="col-6">
                                 <div class="form-group">
                                     <label>Major</label>
                                     <input name="update_major" id="update_major" class="form-control" maxlength="2">
@@ -246,7 +252,7 @@ include '__navbar_admin.php';
                                     <label>Minor</label>
                                     <input name="update_minor" id="update_minor" class="form-control" maxlength="12">
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>ชื่ออุปกรณ์</label>

@@ -1,8 +1,8 @@
 <?php
 include '../__connect.php';
 $insert_uuid = $_POST['insert_uuid'];
-$insert_major = $_POST['insert_major'];
-$insert_minor = $_POST['insert_minor'];
+$insert_major = "";
+$insert_minor = "";
 $insert_device_name = $_POST['insert_device_name'];
 $insert_status = $_POST['insert_status'];
 

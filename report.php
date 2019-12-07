@@ -167,6 +167,8 @@ include '__checkSession.php';
             let startDate = $("#startDate").val();
             let endDate = $("#endDate").val();
             let statusType = $("#statusType").val();
+            let showMac = $("#showMac")[0].checked ? 'Y' : 'N';
+
             if (startDate && endDate) {
                 if (strToDate(endDate) < strToDate(startDate)) {
                     alert("เลือกวันที่ไม่ถูกต้องวันที่เริ่มต้นต้องกว่าวันที่สิ้นสุด!")
@@ -175,6 +177,7 @@ include '__checkSession.php';
                     window.open("reportEmployee.php?"
                         + "startDateDisplay=" + (startDate)
                         + "&endDateDisplay=" + (endDate)
+                        + "&showMac=" + (showMac)
                         + "&startDate=" + strToDate543(startDate)
                         + "&endDate=" + strToDate543(endDate)
                         + "&departmentCode=" + departmentCode
@@ -231,6 +234,15 @@ include '__navbar_admin.php';
                         <option value="O">ออกปกติ</option>
                         <option value="B">ออกก่อนเวลา</option>
                     </select>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="font-weight-bold">แสดง Mac Address</label>
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="showMac"
+                                          name="showMac" value=""> แสดง</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div align="left">

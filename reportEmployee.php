@@ -11,6 +11,7 @@ if (isset($_GET['departmentCode'])) {
 $startDate = $_GET['startDate'];
 $startDateDisplay = $_GET['startDateDisplay'];
 $endDate = $_GET['endDate'];
+$showMac = $_GET['showMac'];
 $endDateDisplay = $_GET['endDateDisplay'];
 $statusType = $_GET['statusType'];
 $sql = "SELECT * from department where department_code = '$departmentCode'";
@@ -104,8 +105,11 @@ $html .= "
         <th>เวลาเข้า</th>
         <th>สถานะเข้า</th>
         <th>เวลาออก</th>
-        <th>สถานะออก</th>
-    </tr>";
+        <th>สถานะออก</th>";
+if($showMac=="Y"){
+    $html.= "<th>MAC Address</th>";
+}
+$html.="</tr>";
 $sql = "select count(*) as total,
 date_format(p.time_in,'%d-%m-%Y') as work_date,
 date_format(p.time_in,'%Y-%m-%d') as work_date_ff 
@@ -172,6 +176,9 @@ where 1=1 ";
         $html .= "<td>" . $temp['status_in_name'] . "</td>";
         $html .= "<td>" . $temp['out_time'] . "</td>";
         $html .= "<td>" . $temp['status_out_name'] . "</td>";
+        if($showMac=="Y"){
+            $html .= "<td>".$temp['mac_address']."</td>";
+        }
         $html .= "</tr>";
     }
 

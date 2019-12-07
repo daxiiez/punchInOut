@@ -82,7 +82,7 @@ if (isset($_POST['emp_username'])) {
         <div align="center">
             <br>
             <br>
-            <h1 class="font-weight-bold logo">Time Adjust System</h1>
+            <h1 class="font-weight-bold logo">Time AD</h1>
             <img src="img/push_back_time.png" style="width: 20%">
 
         </div>

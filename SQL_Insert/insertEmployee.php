@@ -1,6 +1,7 @@
 <?php
 include '../__connect.php';
 $emp_name = $_POST['emp_name'];
+$emp_id = $_POST['emp_id'];
 $emp_card_id = $_POST['emp_card_id'];
 $emp_address = $_POST['emp_address'];
 $emp_tel = $_POST['emp_tel'];
