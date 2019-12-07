@@ -187,6 +187,18 @@ include '__checkSession.php';
             }
         }
 
+        function deleteEmployee() {
+            let empID = $("#update_emp_id").val();
+            if (confirm("ต้องการที่จะลบพนักงานหรือไม่ ?")) {
+                $.post("SQL_Delete/deleteEmployee.php", {emp_id: empID}, (result) => {
+                    if (result == "result" || result == true) {
+                        alert("แก้ไขข้อมูลพนักกงานสำเร็จ!");
+                        location.reload();
+                    }
+                });
+            }
+        }
+
         function updateEmployee() {
             let userType = $("#update_emp_typeuser")[0].checked ? '1' : '0';
             let updateObj = arrayToObject($("#updateEmployeeForm").serializeArray());
@@ -631,6 +643,7 @@ include '__navbar_admin.php';
                 </div>
                 <div class="modal-footer">
                     <div class="btn-block">
+                        <button type="button" onclick="deleteEmployee()" class="btn btn-danger"><i class="fa fa-trash"></i> ลบพนักงาน</button>
                         <button type="button" onclick="updateEmployee()" class="btn btn-primary"><i
                                     class="fa fa-save"></i> บันทึก
                         </button>
