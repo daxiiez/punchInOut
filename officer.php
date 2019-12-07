@@ -213,9 +213,20 @@ include '__checkSession.php';
             });
         }
 
+        function validateEmpUsername(id) {
+            let eleId = "#"+id;
+            let empUsername = $(eleId).val();
+            $.get("SQL_Select/validateEmpUsername.php", {emp_username: empUsername}, (r) => {
+                let result = JSON.parse(r);
+                if (result.length > 0) {
+                    alert("ชื่อผู้ใช้พนักงานซ้ำ! กรุณาระบุชื่อผู้ใช้ใหม่");
+                    $(eleId).val("");
+                }
+            });
+        }
+
         function validateEmpId() {
             let empId = $("#emp_id").val();
-
             $.get("SQL_Select/validateEmpId.php", {emp_id: empId}, (r) => {
                 let result = JSON.parse(r);
                 if (result.length > 0) {
@@ -373,7 +384,7 @@ include '__navbar_admin.php';
                                                 <div class="form-group">
                                                     <label>รหัสพนักงาน</label>
                                                     <input name="emp_id" id="emp_id" type="number" maxlength="10"
-                                                           onchange="validateEmpId()" c class="form-control" required>
+                                                           onchange="validateEmpId()" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -381,7 +392,9 @@ include '__navbar_admin.php';
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label>Username</label>
-                                                    <input name="emp_username" id="emp_username" class="form-control" maxlength="20" required>
+                                                    <input name="emp_username" id="emp_username"
+                                                           onchange="validateEmpUsername('emp_username')" class="form-control"
+                                                           maxlength="20" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -533,6 +546,7 @@ include '__navbar_admin.php';
                                                 <div class="form-group">
                                                     <label>Username</label>
                                                     <input name="update_emp_username" id="update_emp_username"
+                                                           onchange="validateEmpUsername('update_emp_username')"
                                                            class="form-control" disabled>
                                                 </div>
                                             </div>
@@ -650,7 +664,9 @@ include '__navbar_admin.php';
                 </div>
                 <div class="modal-footer">
                     <div class="btn-block">
-                        <button type="button" onclick="deleteEmployee()" class="btn btn-danger"><i class="fa fa-trash"></i> ลบพนักงาน</button>
+                        <button type="button" onclick="deleteEmployee()" class="btn btn-danger"><i
+                                    class="fa fa-trash"></i> ลบพนักงาน
+                        </button>
                         <button type="button" onclick="updateEmployee()" class="btn btn-primary"><i
                                     class="fa fa-save"></i> บันทึก
                         </button>
