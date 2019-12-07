@@ -50,11 +50,11 @@ if (isset($_POST['emp_username'])) {
         width: 100%;
         height: 100%;
 
-        -webkit-filter: blur(2px);
+/*        -webkit-filter: blur(2px);
         -moz-filter: blur(2px);
         -o-filter: blur(2px);
         -ms-filter: blur(2px);
-        filter: blur(2px);
+        filter: blur(2px);*/
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
