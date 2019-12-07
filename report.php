@@ -82,7 +82,7 @@ include '__checkSession.php';
         function setDepartmentList() {
             $.get("SQL_Select/selectDepartment.php", null, (data) => {
                 employeeList = JSON.parse(data);
-                let txt = "<option value=''>--เลือกแผนก--</option>";
+                let txt = "<option value=''>--เลือกทั้งหมด--</option>";
                 employeeList.forEach((f) => {
                     txt += "<option value='" + f.department_code + "'>" + f.department_code + " : " + f.name + "</option>"
                 });
@@ -228,7 +228,7 @@ include '__navbar_admin.php';
                            list="departmentList"
                            id="statusType"
                            name="statusType">
-                        <option value="">--เลือก--</option>
+                        <option value="">--เลือกทั้งหมด--</option>
                         <option value="I">เข้างานปกติ</option>
                         <option value="L">เข้างานสาย</option>
                         <option value="O">ออกปกติ</option>
